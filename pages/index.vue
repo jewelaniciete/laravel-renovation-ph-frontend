@@ -118,7 +118,9 @@ onMounted(() => {
                                             </div>
                                         </div><!--end col-->
                                         <div class="col-span-12 xl:col-span-4">
-                                            <DropDown :config="locationDropdownConfig" />                                                
+                                            <ClientOnly>
+                                                <DropDown :config="locationDropdownConfig" />  
+                                            </ClientOnly>                                              
                                         </div><!--end col-->
                                         <div class="col-span-12 xl:col-span-4">
                                             <div class="h-full mt-3">

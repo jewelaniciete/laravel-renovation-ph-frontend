@@ -3,8 +3,10 @@ export default defineNuxtConfig({
   experimental: {
     componentIslands: true
   },
+
   ssr: true,
   devtools: { enabled: true },
+
   css: [
     '~/assets/css/icons.css',
     '~/assets/css/tailwind.css',
@@ -15,6 +17,7 @@ export default defineNuxtConfig({
     '~/assets/libs/glightbox/css/plyr.min.css',
     '~/assets/libs/glightbox/css/glightbox.min.css',
   ],
+
   app : {
     head : {
       script : [
@@ -26,15 +29,19 @@ export default defineNuxtConfig({
         {src: '/libs/nouislider/nouislider.min.js'},
         {src: '/libs/smooth-scroll/smooth-scroll.min.js'},
         {src: '/libs/glightbox/js/glightbox.min.js'},
+        {src: '/libs/tw-elements/js/tw-elements.umd.min.js'},
         {src: '/js/pages.js', defer: true},
         {src: '/js/app.js', defer: true},
       ]
     }
   },
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
-  }
+  },
+
+  modules: ["@nuxt/ui"]
 })
