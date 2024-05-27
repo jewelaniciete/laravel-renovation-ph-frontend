@@ -103,7 +103,7 @@ async function profileView() {
                                                         </div>
                                                     </div>
                                                     <div class="flex justify-end w-full p-5 items-right">
-                                                        <img src="assets/images/logo/editt.svg" alt="" class="w-6 h-6">
+                                                        <a href="https://www.youtube.com/watch?v=eRYZVkxHBls"><img src="assets/images/logo/editt.svg" alt="" class="w-6 h-6" ></a>
                                                     </div>
                                                 </div>
                                                   
