@@ -2575,6 +2575,9 @@ body{
 .min-h-screen{
   min-height: 100vh !important;
 }
+.h-72{
+  height: 29rem !important;
+}
 .h-custom{
   height: 40rem !important;
 }
@@ -2622,6 +2625,9 @@ body{
 }
 .w-72{
   width: 18rem !important;
+}
+.w-custom{
+  width:27rem !important;
 }
 .w-8{
   width: 2rem !important;
