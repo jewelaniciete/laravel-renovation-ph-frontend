@@ -15,7 +15,7 @@ console.log(formData.value);
 
 async function login() {
     try {
-        const response = await fetch('http://localhost:8000/api/clients/credential-login', {
+        const response = await fetch('http://localhost:8000/api/professionals/credential-login', {
             method: 'POST',
             body: JSON.stringify(formData.value),
             headers: {
@@ -53,7 +53,7 @@ async function login() {
                                             <NuxtLink to="/">
                                                 <img src="assets/images/renovation.svg" alt="" class="logo-dark h-[22px] block dark:hidden">
                                             </NuxtLink>
-                                            <div class="mt-5">
+                                                                                        <div class="mt-5">
                                                 <img src="assets/images/signin.png" alt="" class="">
                                             </div>
                                         </div>
@@ -62,7 +62,7 @@ async function login() {
                                         <div class="flex flex-col justify-center h-full p-12">
                                             <div class="text-center">
                                                 <h5 class="text-[18.5px] text-white">Welcome Back !</h5>
-                                                <p class="mt-3 text-white/80">Sign in as a client to continue to <span class="font-bold">Renovation Ph</span>.</p>
+                                                <p class="mt-3 text-white/80">Sign in as a professional to continue to <span class="font-bold">Renovation Ph</span>.</p>
                                             </div>
                                             <form @submit.prevent="login" class="mt-8">
                                                 <div class="mb-5">
@@ -84,8 +84,8 @@ async function login() {
                                             <div class="text-center">
                                                 <p class="text-white">Don't have an account yet? <NuxtLink to="/sign-up" class="text-white underline fw-medium"> Sign Up </NuxtLink></p>
                                             </div>
-                                            <div class="flex justify-end px-6 mx-auto mt-5 text-white max-w-7xl">
-                                               <p>Sign-in as a <NuxtLink to="/sign-in-prof" class="text-md font-semibold hover:underline"> professional </NuxtLink></p>
+                                            <div class="flex justify-end px-6 mx-auto mt-5  text-white max-w-7xl">
+                                               <p>Sign-in as a <NuxtLink to="/sign-in" class="text-md font-semibold hover:underline"> client </NuxtLink></p>
                                             </div>
                                             <div class="flex justify-end px-6 mx-auto mt-5 font-semibold text-white max-w-7xl">
                                                 <NuxtLink to="/" class="text-md"> ← Back to Home</NuxtLink>

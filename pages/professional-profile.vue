@@ -67,7 +67,7 @@ definePageMeta({
                                                             <div class="col-span-12 lg:col-span-12">
                                                                 <div class="grid grid-cols-12 md:gap-5">
                                                                     <div class="col-span-12 lg:col-span-4">
-                                                                        <div class="h-72 flex flex-col items-center justify-center bg-gray-400 p-2 transition-all duration-500 border-2 border-dashed hover:bg-gray-400 hover:underline rounded-md dark:bg-transparent dark:shadow-none">
+                                                                        <div class="h-72 flex flex-col items-center justify-center bg-gray-400 p-2 transition-all duration-500 border-2 border-dashed hover:bg-gray-500 hover:underline rounded-md dark:bg-transparent dark:shadow-none">
                                                                             <div>
                                                                                 <div class="w-auto mt-6 text-center h-80">
                                                                                     <button class="flex flex-col items-center justify-center p-10">
