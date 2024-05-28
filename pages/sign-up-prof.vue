@@ -23,7 +23,7 @@ const router = useRouter();
                                                 <img src="assets/images/renovation.svg" alt="" class="h-[22px] block dark:hidden">
                                             </a>
                                             <div class="mt-5">
-                                                <img src="assets/images/signup.png" alt="">
+                                                <img src="assets/images/renovation/signup-prof.png" alt="">
                                             </div>
                                         </div>
                                     </div>

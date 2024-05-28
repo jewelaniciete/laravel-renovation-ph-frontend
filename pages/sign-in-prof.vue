@@ -54,7 +54,7 @@ async function login() {
                                                 <img src="assets/images/renovation.svg" alt="" class="logo-dark h-[22px] block dark:hidden">
                                             </NuxtLink>
                                                                                         <div class="mt-5">
-                                                <img src="assets/images/signin.png" alt="" class="">
+                                                <img src="assets/images/renovation/signin-prof.png" alt="" class="">
                                             </div>
                                         </div>
                                     </div>
@@ -84,8 +84,8 @@ async function login() {
                                             <div class="text-center">
                                                 <p class="text-white">Don't have an account yet? <NuxtLink to="/sign-up" class="text-white underline fw-medium"> Sign Up </NuxtLink></p>
                                             </div>
-                                            <div class="flex justify-end px-6 mx-auto mt-5  text-white max-w-7xl">
-                                               <p>Sign-in as a <NuxtLink to="/sign-in" class="text-md font-semibold hover:underline"> client </NuxtLink></p>
+                                            <div class="flex justify-end px-6 mx-auto mt-5 text-white max-w-7xl">
+                                               <p>Sign-in as a <NuxtLink to="/sign-in" class="font-semibold text-md hover:underline"> client </NuxtLink></p>
                                             </div>
                                             <div class="flex justify-end px-6 mx-auto mt-5 font-semibold text-white max-w-7xl">
                                                 <NuxtLink to="/" class="text-md"> ← Back to Home</NuxtLink>
