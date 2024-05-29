@@ -2548,6 +2548,12 @@ body{
 .h-60{
   height: 20rem !important;
 }
+.h-64{
+  height: 24rem !important;
+}
+/* .h-80{
+  height: 26rem !important;
+} */
 .h-8{
   height: 2rem !important;
 }
@@ -2581,7 +2587,7 @@ body{
 .min-h-screen{
   min-height: 100vh !important;
 }
-.h-72{
+.h-73{
   height: 29rem !important;
 }
 .h-custom{
@@ -2620,6 +2626,9 @@ body{
 .w-32{
   width: 8rem !important;
 }
+.w-30{
+  width: 22rem !important;
+}
 .w-40{
   width: 10rem !important;
 }
@@ -2631,6 +2640,12 @@ body{
 }
 .w-6{
   width: 1.5rem !important;
+}
+.w-70{
+  width: 50rem !important;
+}
+.w-custom1{
+  width: 11rem !important;
 }
 .w-72{
   width: 18rem !important;
@@ -3860,6 +3875,10 @@ body{
 .bg-gray-50{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(248 249 252 / var(--tw-bg-opacity)) !important;
+}
+.bg-gray-400{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(232 233 237 / var(--tw-bg-opacity)) !important;
 }
 .bg-gray-500{
   --tw-bg-opacity: 1 !important;
@@ -8084,4 +8103,8 @@ body{
 
 .dark  {
   color: #e5e7eb; /* Tailwind's gray-50 */
+}
+
+.list-disc{
+  list-style-type: disc;
 }

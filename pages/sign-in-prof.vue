@@ -1,42 +1,88 @@
 <script setup>
-import { useRouter } from 'vue-router';
+import Toastify from 'toastify-js';
+import "toastify-js/src/toastify.css"; // Potential source of error
 
 definePageMeta({
   layout: 'template-extra'
-})
-const router = useRouter();
-const formData = ref({
-    email: '',
-    password: '',
-    remember_me: '',
 });
 
-console.log(formData.value);
+const formData = ref({
+  email: '',
+  password: '',
+  remember_me: '',
+  userType: 'professional' // default to client, can be 'client' or 'professional'
+});
+
+const setUserType = (type) => {
+  formData.value.userType = type;
+};
 
 async function login() {
-    try {
-        const response = await fetch('http://localhost:8000/api/professionals/credential-login', {
-            method: 'POST',
-            body: JSON.stringify(formData.value),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-        });
-        if (response.ok) {
-            const data = await response.json(); 
-            document.cookie = `access_token=${data.data}; path=/; secure; samesite=strict`;
+  const endpointMap = {
+    client: 'http://localhost:8000/api/clients/credential-login',
+    professional: 'http://localhost:8000/api/professionals/credential-login'
+  };
 
-            window.location.href = '/';
-        } else {
-            const errorData = await response.json();
-            console.error('Failed to login:', errorData.message || response.statusText);
-        }
-    } catch (error) {
-        console.error('Error during login:', error);
+  const endpoint = endpointMap[formData.value.userType];
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      body: JSON.stringify(formData.value),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json(); // Parse the JSON response to get the access token
+
+      // Store the access token and user type in cookies
+      document.cookie = `access_token=${data.data}; path=/; secure; samesite=strict`;
+      document.cookie = `user-type=${formData.value.userType}; path=/; secure; samesite=strict`;
+
+      // Show success toast
+      Toastify({
+        text: "Login successful!",
+        duration: 3000, // duration in milliseconds
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        backgroundColor: "#4caf50", // green
+      }).showToast();
+
+      // Redirect to home page
+      setTimeout(() => {
+        window.location.href = '/'; // Change the URL to your home page
+      }, 3000); // delay the redirection to allow user to see the toast
+    } else {
+      const errorData = await response.json();
+      console.error('Failed to login:', errorData.message || response.statusText);
+
+      // Show error toast
+      Toastify({
+        text: `Login failed: ${errorData.message || response.statusText}`,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#f44336", // red
+      }).showToast();
     }
+  } catch (error) {
+    console.error('Error during login:', error);
+
+    // Show error toast
+    Toastify({
+      text: `Error during login: ${error.message}`,
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      backgroundColor: "#f44336", // red
+    }).showToast();
+  }
 }
 </script>
+
 
 <template>
     <div class="main-content">
@@ -61,6 +107,11 @@ async function login() {
                                     <div class="col-span-12 rounded-b-md lg:col-span-6 group-data-[theme-color=violet]:bg-violet-700 group-data-[theme-color=sky]:bg-sky-700 group-data-[theme-color=red]:bg-red-700 group-data-[theme-color=green]:bg-green-700 group-data-[theme-color=pink]:bg-pink-700 group-data-[theme-color=blue]:bg-blue-700 lg:rounded-b-none lg:ltr:rounded-r-lg rtl:rounded-l-lg">
                                         <div class="flex flex-col justify-center h-full p-12">
                                             <div class="text-center">
+                                                <div class="mb-5">
+                          <div class="flex space-x-2">
+                            <button type="button" :class="['w-full py-2.5 rounded', formData.userType === 'professional' ? 'bg-green-400\/20 text-white' : 'bg-gray-500\/20 text-gray-500']" @click="setUserType('professional')">Professional</button>
+                          </div>
+                        </div>
                                                 <h5 class="text-[18.5px] text-white">Welcome Back !</h5>
                                                 <p class="mt-3 text-white/80">Sign in as a professional to continue to <span class="font-bold">Renovation Ph</span>.</p>
                                             </div>

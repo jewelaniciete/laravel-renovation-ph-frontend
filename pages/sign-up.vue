@@ -1,8 +1,68 @@
 <script setup>
 import { useRouter } from 'vue-router';
+import Toastify from 'toastify-js';
+import "toastify-js/src/toastify.css";
+
 definePageMeta({
   layout: 'template-extra'
-})
+});
+
+const formData = ref({
+  email: '',
+  password: '',
+});
+
+async function register() {
+  try {
+    const response = await fetch('http://localhost:8000/api/clients/credential-register', {
+      method: 'POST',
+      body: JSON.stringify(formData.value),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    });
+
+    if (response.ok) {
+      // Show success toast
+      Toastify({
+        text: "Registration successful!",
+        duration: 3000, // duration in milliseconds
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        backgroundColor: "#4caf50", // green
+      }).showToast();
+
+      // Redirect to sign-in page
+      setTimeout(() => {
+        window.location.href = '/sign-in'; // Change the URL to your sign-in page
+      }, 3000); // delay the redirection to allow user to see the toast
+    } else {
+      const errorText = await response.text(); // read the error response
+      console.error('Failed to register:', errorText);
+
+      // Show error toast
+      Toastify({
+        text: `Registration failed: ${errorText}`,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#f44336", // red
+      }).showToast();
+    }
+  } catch (error) {
+    console.error('Error during registration:', error);
+
+    // Show error toast
+    Toastify({
+      text: `Error during registration: ${error.message}`,
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      backgroundColor: "#f44336", // red
+    }).showToast();
+  }
+}
 
 const router = useRouter();
 </script>
@@ -33,15 +93,15 @@ const router = useRouter();
                                                 <h5 class="text-[18.5px] text-white">Let's Get Started</h5>
                                                 <p class="mt-3 text-gray-50">Sign up and get access to all the features of <span class="font-bold">Renovation Ph</span>.</p>
                                             </div>
-                                            <form action="index.html" class="mt-8">
+                                            <form @submit.prevent="register" class="mt-8">
                                                 
                                                 <div class="mb-5">
                                                     <label for="passwordInput" class="text-white">Email</label>
-                                                    <input type="email" class="w-full mt-1 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-900 text-gray-900" required="" id="emailInput" placeholder="Enter your email">
+                                                    <input type="email" v-model="formData.email" class="w-full mt-1 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-900 text-gray-900" required="" id="emailInput" placeholder="Enter your email">
                                                 </div>
                                                 <div class="mb-5">
                                                     <label for="emailInput" class="text-white">Password</label>
-                                                    <input type="password" class="w-full mt-1  py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-900 text-gray-900" id="passwordInput" placeholder="Enter your password">
+                                                    <input type="password" v-model="formData.password" class="w-full mt-1  py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-900 text-gray-900" id="passwordInput" placeholder="Enter your password">
                                                 </div>
                                                 <div class="mb-4">
                                                     <div><input class="align-middle border-transparent rounded focus:ring-0 focus:ring-offset-0 group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500" type="checkbox" id="flexCheckDefault">

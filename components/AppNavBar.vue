@@ -1,99 +1,132 @@
 <script setup>
-import { ref, onMounted, computed} from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 const client = ref({});
 const profile = ref({});
 const router = useRouter();
-const showNavbarAccount = ref(false)
+const showNavbarAccount = ref(false);
 
 onMounted(async () => {
-    await clientView();
-    await profileView();
-    showNavbarAccount.value = true
+  await clientView();
+  await profileView();
+  showNavbarAccount.value = true;
 });
 
 function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) {
-        const cookie = parts.pop()?.split(';').shift();
-        return cookie ? decodeURIComponent(cookie) : null;
-    }
-    return null;
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    const cookie = parts.pop()?.split(';').shift();
+    return cookie ? decodeURIComponent(cookie) : null;
+  }
+  return null;
 }
 
-async function clientView() {
-    const accessToken = getCookie('access_token');
-    if (!accessToken) {
-        console.log('Access token is missing');
-        return;
-    }
-    const response = await fetch(`http://localhost:8000/api/clients/view`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
-        },
-    });
+const profileLink = computed(() => {
+  const userType = getCookie('user-type');
+  return userType === 'client' ? '/client-profile' : '/professional-profile';
+});
 
-    if (response.ok) {
-        const data = await response.json();
-        client.value = data.data;
-        console.log(client.value);
-    } else {
-        console.error('Failed to fetch client data:', response.statusText);
-    }
+async function clientView() {
+  const accessToken = getCookie('access_token');
+  const userType = getCookie('user-type');
+
+  if (!accessToken) {
+    console.error('Access token is missing');
+    return;
+  }
+
+  let endpoint = 'clients';
+  if (userType === 'professional') {
+    endpoint = 'professionals';
+  }
+
+  const response = await fetch(`http://localhost:8000/api/${endpoint}/view`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
+    },
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    client.value = data.data;
+  } else {
+    console.error(`Failed to fetch ${userType} data:`, response.statusText);
+  }
 }
 
 async function profileView() {
-    const accessToken = getCookie('access_token');
-    if (!accessToken) {
-        console.log('Access token is missing');
-        return;
-    }
-    const response = await fetch(`http://localhost:8000/api/clients/profile-view`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
-        },
-    });
-    if (response.ok) {
-        const data = await response.json();
-        profile.value = data.data;
-        console.log(profile.value);
-    } else {
-        console.error('Failed to fetch client data:', response.statusText);
-    }
+  const accessToken = getCookie('access_token');
+  const userType = getCookie('user-type');
 
+  if (!accessToken) {
+    console.error('Access token is missing');
+    return;
+  }
+
+  let endpoint = 'clients';
+  if (userType === 'professional') {
+    endpoint = 'professionals';
+  }
+
+  const response = await fetch(`http://localhost:8000/api/${endpoint}/profile-view`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
+    },
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    profile.value = data.data;
+    console.log(profile.value);
+  } else {
+    console.error(`Failed to fetch ${userType} data:`, response.statusText);
+  }
 }
 
 async function logout() {
-    const accessToken = getCookie('access_token');
-    if (!accessToken) {
-        console.error('Access token is missing');
-        return;
-    }
-    const response = await fetch('http://localhost:8000/api/clients/credential-logout', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
-        },
+  const accessToken = getCookie('access_token');
+  const userType = getCookie('user-type');
+
+  if (!accessToken) {
+    console.error('Access token is missing');
+    return;
+  }
+
+  let endpoint = 'clients';
+  if (userType === 'professional') {
+    endpoint = 'professionals';
+  }
+
+  try {
+    const response = await fetch(`http://localhost:8000/api/${endpoint}/credential-logout`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
     });
+
     if (response.ok) {
-        document.cookie = 'access_token=; Max-Age=0; path=/;';
-        router.push('/');
+      // Clear the cookies by setting their Max-Age to 0
+      document.cookie = 'access_token=; Max-Age=0; path=/;';
+      document.cookie = 'user-type=; Max-Age=0; path=/;';
+      router.push('/');
     } else {
-        console.error('Failed to logout:', response.statusText);
+      console.error(`Failed to logout ${userType}:`, response.statusText);
     }
+  } catch (error) {
+    console.error(`Error during logout ${userType}:`, error);
+  }
 }
-
-
 </script>
 
 <template> 
@@ -298,8 +331,10 @@ async function logout() {
                                     <a class="text-15 font-medium text-gray-800 group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50" href="bookmark-jobs.html">Bookmarks Jobs</a>
                                 </li>
                                 <li class="p-2 dropdown-item group/dropdown dark:text-gray-300">
-                                    <NuxtLink to="/client-profile" class="text-15 font-medium text-gray-800 group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50" >My Profile</NuxtLink>
-                                </li>
+    <NuxtLink :to="profileLink" class="text-15 font-medium text-gray-800 group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50">
+      My Profile
+    </NuxtLink>
+  </li>
                                 <li class="p-2 dropdown-item group/dropdown dark:text-gray-300">
                                     <a href="/">
                                     <div @click.prevent="logout" class="text-15 font-medium text-gray-800 group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50">Logout</div>

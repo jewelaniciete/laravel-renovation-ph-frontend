@@ -250,11 +250,6 @@ const clientUpdate = async (formData, formKey) => {
     return;
   }
 
-//   let endpoint = 'clients';
-//   if (userType === 'professional') {
-//     endpoint = 'professionals';
-//   }
-
   try {
     const { data, error } = await useFetch(`http://localhost:8000/api/clients/update`, {
       method: 'POST',
@@ -505,7 +500,6 @@ export default {
       showModal: false,
       imageUrl: null,
       caption: '',
-      // Mock profile and client data for demonstration purposes
     
       client: {
         first_name: 'John',
