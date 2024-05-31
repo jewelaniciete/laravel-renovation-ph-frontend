@@ -93,11 +93,11 @@ async function profileView() {
                                                 </div> 
                                                 
                                                 <div class="flex flex-row w-full">
-                                                    <div class="relative flex flex-cols items-end justify-start mt-6 w-full gap-3">
+                                                    <div class="relative flex items-end justify-start w-full gap-3 mt-6 flex-cols">
                                                         <div class="flex items-start justify-start">
                                                             <img id="profile-img" :src="profile.profile_route" alt="" class="w-48 h-48">
                                                         </div>
-                                                        <div class="mt-3 flex flex-col">
+                                                        <div class="flex flex-col mt-3">
                                                             <h6 class="text-2xl font-bold text-gray-900 dark:text-gray-50"> {{ client.first_name }} {{ client.last_name }} </h6>
                                                             <p class="mt-1 text-gray-500 dark:text-gray-300">{{ client.user_name }}</p>
                                                         </div>
@@ -107,23 +107,23 @@ async function profileView() {
                                                     </div>
                                                 </div>
 
-                                                <div class="mt-10 flex flex-row w-full gap-3">
+                                                <div class="flex flex-row w-full gap-3 mt-10">
                                                     <div class="flex items-center justify-center">
-                                                        <button class="flex items-center gap-2 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-bold text-green-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">                       
+                                                        <button class="flex items-center gap-2 px-6 py-2 text-sm font-bold text-green-900 border border-gray-300 rounded-lg shadow-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">                       
                                                             <img src="assets/images/renovation/star.svg" alt="" class="w-6 h-6">
                                                             <span class="">Get Vouch</span>
                                                         </button>
                                                     </div>
                                                     <div class="flex items-center justify-center">
-                                                        <button class="flex items-center gap-2 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-bold text-green-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">                       
+                                                        <button class="flex items-center gap-2 px-6 py-2 text-sm font-bold text-green-900 border border-gray-300 rounded-lg shadow-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">                       
                                                             <img src="assets/images/renovation/share.svg" alt="" class="w-6 h-6">
                                                             <span class="">Share</span>
                                                         </button>
                                                     </div>
                                                 </div>
                                                 <hr class="mt-3 border-gray-200">
-                                                <div class="mt-10 flex flex-row w-full gap-3">
-                                                    <div class="w-full flex items-start justify-start text-2xl font-semibold">
+                                                <div class="flex flex-row w-full gap-3 mt-10">
+                                                    <div class="flex items-start justify-start w-full text-2xl font-semibold">
                                                         <p class="w-full text-gray-400"> <project-count /> </p>
                                                     </div>
                                                 </div>
@@ -133,16 +133,16 @@ async function profileView() {
                                                             <div class="col-span-12 lg:col-span-12">
                                                                 <div class="grid grid-cols-12 md:gap-5">
                                                                     <div class="col-span-12 lg:col-span-4">
-                                                                        <div class="h-full flex flex-col items-center justify-center bg-gray-400 p-2 transition-all duration-500 border-2 border-dashed hover:bg-gray-500 hover:underline rounded-md dark:bg-transparent dark:shadow-none">
+                                                                        <NuxtLink to="/projectForm" class="flex flex-col items-center justify-center h-full p-2 transition-all duration-500 bg-gray-400 border-2 border-dashed rounded-md hover:bg-gray-500 hover:underline dark:bg-transparent dark:shadow-none">
                                                                             <div>
-                                                                                <div class="w-auto mt-6 text-center h-full">
-                                                                                    <NuxtLink to="/projectForm" class="flex flex-col items-center justify-center p-10">
+                                                                                <div class="w-auto h-full mt-6 text-center">
+                                                                                    <div class="flex flex-col items-center justify-center p-10">
                                                                                         <img src="assets/images/renovation/add.svg" alt="" class="w-16 h-16">
-                                                                                        <p class="font-semibold text-gray-900 text-3xl">New Project</p>
-                                                                                    </NuxtLink>
+                                                                                        <p class="text-3xl font-semibold text-gray-900">New Project</p>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
+                                                                        </NuxtLink>
                                                                     </div>
 
                                                                     <proj-card />
