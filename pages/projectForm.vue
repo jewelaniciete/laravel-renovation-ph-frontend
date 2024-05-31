@@ -111,7 +111,7 @@ async function uploadProject() {
     <div class="page-content">
       <section class="relative py-28 lg:py-20">
         <div class="container mx-auto">
-          <div class="grid grid-cols-2">
+          <div class="lg:grid flex lg:grid-cols-2">
             <div class=" w-70 mx-auto bg-white p-6">
               <form @submit.prevent="uploadProject">
                 <p class="text-4xl px-3 text-gray-500">Upload a project</p><br>
@@ -128,7 +128,7 @@ async function uploadProject() {
                       class="text-black placeholder:text-gray-100 lg:w-auto w-30" />
                   </div>
                 </div>
-                <div class="grid grid-cols-2">
+                <div class="grid lg:grid-cols-2">
                   <div class="p-3">
                     <label class="text-gray-500">Start of project</label><br />
                     <input v-model="formData.start_date" type="date" class="text-black" />

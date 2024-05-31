@@ -125,7 +125,6 @@ async function profileView() {
                                                 <div class="mt-10 flex flex-row w-full gap-3">
                                                     <div class="w-full flex items-start justify-start text-2xl font-semibold">
                                                         <p class="w-full text-gray-400"> <project-count /> </p>
-                                                       
                                                     </div>
                                                 </div>
                                                 <section class="py-16">
