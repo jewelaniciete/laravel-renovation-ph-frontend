@@ -92,10 +92,10 @@ async function profileView() {
                                             </div>
                                             <div class="flex flex-row w-full">
                                                 <div
-                                                    class="relative flex-col items-start justify-start mt-custom ml-custom">
+                                                    class="relative flex-col items-start justify-start w-full mt-custom ml-custom">
                                                     <div class="flex items-start justify-start">
                                                         <img :src="profile.profile_route" alt=""
-                                                            class="w-48 h-48 rounded-full border-4">
+                                                            class="w-48 h-48 border-4 rounded-full">
                                                     </div>
 
                                                     <div class="mt-3">
@@ -202,14 +202,14 @@ async function profileView() {
                                         <img :src="profile.profile_route" alt="User profile"
                                             class="w-12 h-12 rounded-full" />
                                         <button @click.prevent="showModal = true"
-                                            class="w-full h-10 text-left truncate border border-gray-400 hover:bg-gray-50 bg-white rounded-full resize-none xs:text-sm sm:text-lg dark:bg-gray-700 dark:text-white dark:border-gray-500 p-2 text-gray-500">
+                                            class="w-full h-10 p-2 text-left text-gray-500 truncate bg-white border border-gray-400 rounded-full resize-none hover:bg-gray-50 xs:text-sm sm:text-lg dark:bg-gray-700 dark:text-white dark:border-gray-500">
                                             Start a post, try writing with AI
                                         </button>
                                     </div>
                                     <!--post modal-->
                                     <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-60">
-    <div class="relative w-100 h-auto bg-white rounded-lg shadow-xl dark:bg-neutral-800">
-      <div class="flex justify-between items-center bg-gray-200 rounded-t-md p-4 border-b dark:border-gray-700">
+    <div class="relative h-auto bg-white rounded-lg shadow-xl w-100 dark:bg-neutral-800">
+      <div class="flex items-center justify-between p-4 bg-gray-200 border-b rounded-t-md dark:border-gray-700">
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Create Post</h3>
         <button @click="showModal = false" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" aria-label="Close">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -220,29 +220,29 @@ async function profileView() {
         </button>
       </div>
       <div class="px-6 space-y-6">
-        <textarea type="text" class="w-full p-2 rounded-md resize-none overflow-hidden border-none text-2xl dark:bg-neutral-700 text-black dark:text-white h-10 dark:border-gray-600 focus:ring-0" placeholder="add a title"></textarea>
+        <textarea type="text" class="w-full h-10 p-2 overflow-hidden text-2xl text-black border-none rounded-md resize-none dark:bg-neutral-700 dark:text-white dark:border-gray-600 focus:ring-0" placeholder="add a title"></textarea>
       </div>
       <div class="px-6 py-2 space-y-6">
-        <textarea type="text" class="w-full p-2 rounded-md resize-none border-none text-2xl dark:bg-neutral-700 text-black dark:text-white h-50 dark:border-gray-600 focus:ring-0" placeholder="What's on your mind?"></textarea>
+        <textarea type="text" class="w-full p-2 text-2xl text-black border-none rounded-md resize-none dark:bg-neutral-700 dark:text-white h-50 dark:border-gray-600 focus:ring-0" placeholder="What's on your mind?"></textarea>
       </div>
       <div class="px-6 py-2">
         <div v-if="imageSrcs.length" class="flex space-x-2">
           <div v-for="(src, index) in imageSrcs" :key="index">
-            <img :src="src" alt="Image Preview" class="w-40 h-40 rounded-md mb-4">
+            <img :src="src" alt="Image Preview" class="w-40 h-40 mb-4 rounded-md">
           </div>
         </div>
       </div>
       <div class="p-3">
-        <div class="flex resize-none rounded-md border p-2 justify-between text-black dark:border-gray-600 dark:bg-neutral-700 dark:text-white">
-          <p class="select-none text-lg">Add to your post</p>
+        <div class="flex justify-between p-2 text-black border rounded-md resize-none dark:border-gray-600 dark:bg-neutral-700 dark:text-white">
+          <p class="text-lg select-none">Add to your post</p>
           <div>
-            <img id="uploadImage" class="w-26 cursor-pointer" src="assets/images/gallery.svg" @click="triggerFileInput" />
+            <img id="uploadImage" class="cursor-pointer w-26" src="assets/images/gallery.svg" @click="triggerFileInput" />
             <input type="file" ref="fileInput" @change="previewImage" style="display:none;" multiple />
           </div>
         </div>
       </div>
       <div class="flex items-center justify-center p-4 border-t dark:border-gray-700">
-        <button @click="showModal = false" class="px-4 py-2 text-black bg-gray-200 w-full rounded-md hover:bg-gray-500">Post</button>
+        <button @click="showModal = false" class="w-full px-4 py-2 text-black bg-gray-200 rounded-md hover:bg-gray-500">Post</button>
       </div>
     </div>
   </div>

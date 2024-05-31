@@ -1,7 +1,75 @@
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
+
 definePageMeta({
-  layout: 'template-default'
+    layout: 'template-default'
 })
+
+const client = ref({});
+const profile = ref({});
+
+onMounted(async () => {
+    await clientView();
+    await profileView();
+});
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+        const cookie = parts.pop()?.split(';').shift();
+        return cookie ? decodeURIComponent(cookie) : null;
+    }
+    return null;
+}
+
+async function clientView() {
+    const accessToken = getCookie('access_token');
+    if (!accessToken) {
+        console.log('Access token is missing');
+        return;
+    }
+    const response = await fetch(`http://localhost:8000/api/professionals/view`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        },
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        client.value = data.data;
+        console.log(client.value);
+    } else {
+        console.error('Failed to fetch client data:', response.statusText);
+    }
+}
+
+async function profileView() {
+    const accessToken = getCookie('access_token');
+    if (!accessToken) {
+        console.log('Access token is missing');
+        return;
+    }
+    const response = await fetch(`http://localhost:8000/api/professionals/profile-view`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        },
+    });
+    if (response.ok) {
+        const data = await response.json();
+        profile.value = data.data;
+        console.log(profile.value);
+    } else {
+        console.error('Failed to fetch client data:', response.statusText);
+    }
+}
+
 </script>
 
 <template>
@@ -24,13 +92,13 @@ definePageMeta({
                                                 </div> 
                                                 
                                                 <div class="flex flex-row w-full">
-                                                    <div class="relative flex flex-cols items-end justify-start mt-6 w-full gap-3">
+                                                    <div class="relative flex items-end justify-start w-full gap-3 mt-6 flex-cols">
                                                         <div class="flex items-start justify-start">
-                                                            <img id="profile-img" src="assets/images/user/img-02.jpg" alt="" class="w-48 h-48">
+                                                            <img id="profile-img" :src="profile.profile_route" alt="" class="w-48 h-48">
                                                         </div>
-                                                        <div class="mt-3 flex flex-col">
-                                                            <h6 class="text-2xl font-bold text-gray-900 dark:text-gray-50">James Bond</h6>
-                                                            <p class="mt-1 text-gray-500 dark:text-gray-300">Lowkey man</p>
+                                                        <div class="flex flex-col mt-3">
+                                                            <h6 class="text-2xl font-bold text-gray-900 dark:text-gray-50"> {{ client.first_name }} {{ client.last_name }} </h6>
+                                                            <p class="mt-1 text-gray-500 dark:text-gray-300">{{ client.user_name }}</p>
                                                         </div>
                                                     </div>
                                                     <div class="flex justify-end w-full p-5 items-right">
@@ -38,26 +106,26 @@ definePageMeta({
                                                     </div>
                                                 </div>
 
-                                                <div class="mt-10 flex flex-row w-full gap-3">
+                                                <div class="flex flex-row w-full gap-3 mt-10">
                                                     <div class="flex items-center justify-center">
-                                                        <button class="flex items-center gap-2 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-bold text-green-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">                       
+                                                        <button class="flex items-center gap-2 px-6 py-2 text-sm font-bold text-green-900 border border-gray-300 rounded-lg shadow-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">                       
                                                             <img src="assets/images/renovation/star.svg" alt="" class="w-6 h-6">
                                                             <span class="">Get Vouch</span>
                                                         </button>
                                                     </div>
                                                     <div class="flex items-center justify-center">
-                                                        <button class="flex items-center gap-2 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-bold text-green-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">                       
+                                                        <button class="flex items-center gap-2 px-6 py-2 text-sm font-bold text-green-900 border border-gray-300 rounded-lg shadow-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">                       
                                                             <img src="assets/images/renovation/share.svg" alt="" class="w-6 h-6">
                                                             <span class="">Share</span>
                                                         </button>
                                                     </div>
                                                 </div>
                                                 <hr class="mt-3 border-gray-200">
-                                                <div class="mt-10 flex flex-row w-full gap-3">
-                                                    <div class="w-full flex items-start justify-start text-2xl font-semibold">
+                                                <div class="flex flex-row w-full gap-3 mt-10">
+                                                    <div class="flex items-start justify-start w-full text-2xl font-semibold">
                                                         <p class="w-full">0 projects</p>
                                                         <div class="flex justify-end w-full items-right">
-                                                            <a href="https://www.youtube.com/watch?v=eRYZVkxHBls"><img src="assets/images/logo/editt.svg" alt="" class="border p-1 w-8 h-8" ></a>
+                                                            <a href="https://www.youtube.com/watch?v=eRYZVkxHBls"><img src="assets/images/logo/editt.svg" alt="" class="w-8 h-8 p-1 border" ></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -67,16 +135,16 @@ definePageMeta({
                                                             <div class="col-span-12 lg:col-span-12">
                                                                 <div class="grid grid-cols-12 md:gap-5">
                                                                     <div class="col-span-12 lg:col-span-4">
-                                                                        <div class="h-72 flex flex-col items-center justify-center bg-gray-400 p-2 transition-all duration-500 border-2 border-dashed hover:bg-gray-500 hover:underline rounded-md dark:bg-transparent dark:shadow-none">
+                                                                        <NuxtLink to="/projectForm" class="flex flex-col items-center justify-center h-full p-2 transition-all duration-500 bg-gray-400 border-2 border-dashed rounded-md hover:bg-gray-300 hover:underline dark:bg-transparent dark:shadow-none">
                                                                             <div>
-                                                                                <div class="w-auto mt-6 text-center h-80">
-                                                                                    <button class="flex flex-col items-center justify-center p-10">
+                                                                                <div class="w-auto mt-6 text-center">
+                                                                                    <div class="flex flex-col items-center justify-center h-full p-10">
                                                                                         <img src="assets/images/renovation/add.svg" alt="" class="w-16 h-16">
-                                                                                        <p class="font-semibold text-gray-900 text-3xl">New Project</p>
-                                                                                    </button>
+                                                                                        <p class="text-3xl font-semibold text-gray-900">New Project</p>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
+                                                                        </NuxtLink>
                                                                     </div>
                                                                     <div class="col-span-12 lg:col-span-4">
                                                                         <div class="p-2 transition-all duration-500 bg-white rounded-md shadow-md dark:bg-transparent dark:shadow-none">
