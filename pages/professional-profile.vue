@@ -124,10 +124,8 @@ async function profileView() {
                                                 <hr class="mt-3 border-gray-200">
                                                 <div class="mt-10 flex flex-row w-full gap-3">
                                                     <div class="w-full flex items-start justify-start text-2xl font-semibold">
-                                                        <p class="w-full">0 projects</p>
-                                                        <div class="flex justify-end w-full items-right">
-                                                            <a href="https://www.youtube.com/watch?v=eRYZVkxHBls"><img src="assets/images/logo/editt.svg" alt="" class="border p-1 w-8 h-8" ></a>
-                                                        </div>
+                                                        <p class="w-full text-gray-400"> <project-count /> </p>
+                                                       
                                                     </div>
                                                 </div>
                                                 <section class="py-16">

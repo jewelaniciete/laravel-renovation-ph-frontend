@@ -19,19 +19,12 @@ interface Project {
   data: ProjectData;
 }
 
-interface Proj {
-  name: string;
-  slug: string;
-}
-
-const projInfo = ref<Proj[]>([]);
 const project = ref<Project | null>(null);
 const error = ref<Error | null>(null);
 const route = useRoute();
 const param = route.params.param as string;
 
 onMounted(() => {
-  fetchProjinfo();
   fetchProject(param);
 });
 
@@ -84,32 +77,9 @@ const fetchProject = async (param: string) => {
   }
 }
 
-async function fetchProjinfo() {
-  const accessToken = getCookie('access_token');
 
-  if (!accessToken) {
-    console.error('Access token is missing');
-    return;
-  }
-
-  const response = await fetch('http://localhost:8000/api/professionals/project-index', {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    },
-  });
-
-  if (response.ok) {
-    const data = await response.json();
-    projInfo.value = data.data;
-    console.log(projInfo.value);
-  } else {
-    console.error(`Failed to fetch Project data:`, response.statusText);
-  }
-}
 </script>
+
 
 <template>
   <div class="main-content bg-gray-400">
@@ -137,18 +107,7 @@ async function fetchProjinfo() {
               <div v-else>
                 <p>Loading...</p>
               </div>
-            </div>
-
-            <div class="w-30 h-auto mx-auto sticky bg-white p-6 text-black">
-              <p class="text-2xl font-semibold pb-2">Other Projects</p>
-              <div class="flex gap-6">
-                <ul class="text-sm space-y-2">
-                  <li class="list-item"><NuxtLink to="/professional-profile"> All Projects </NuxtLink></li>
-                  <li v-for="(proj, index) in projInfo" :key="index" class="list-item">
-                    <NuxtLink :to="`/projectView/${proj.slug}`" class="form-text" aria-current="page">{{ proj.name }}</NuxtLink>
-                  </li>
-                </ul>
-              </div>
+            
             </div>
           </div>
         </div>
@@ -156,3 +115,10 @@ async function fetchProjinfo() {
     </div>
   </div>
 </template>
+
+
+
+
+<style>
+
+</style>

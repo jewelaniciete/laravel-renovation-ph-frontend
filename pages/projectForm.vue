@@ -109,7 +109,7 @@ async function uploadProject() {
 <template>
   <div class="main-content bg-gray-400">
     <div class="page-content">
-      <section class="relative py-20">
+      <section class="relative py-28 lg:py-20">
         <div class="container mx-auto">
           <div class="grid grid-cols-2">
             <div class=" w-70 mx-auto bg-white p-6">
@@ -120,12 +120,12 @@ async function uploadProject() {
                   <div class="p-3">
                     <label class="text-xl text-gray-500">Project Title</label><br>
                     <input type="text" v-model="formData.name" placeholder="Project Title"
-                      class="text-black placeholder:text-gray-100" />
+                      class="text-black placeholder:text-gray-100 lg:w-auto w-30" />
                   </div>
                   <div class="p-3">
                     <label class="text-xl text-gray-500">Cost</label><br>
                     <input type="number" placeholder="Add Cost" v-model="formData.cost"
-                      class="text-black placeholder:text-gray-100" />
+                      class="text-black placeholder:text-gray-100 lg:w-auto w-30" />
                   </div>
                 </div>
                 <div class="grid grid-cols-2">
