@@ -100,7 +100,7 @@ onMounted(() => {
                 <div class="container mx-auto">
                     <div class="grid items-center grid-cols-12 rtl:gap-10">
                         <div class="col-span-12 lg:col-span-7">
-                            <div class="mb-3 ltr:mr-14 rtl:ml-14">
+                            <div class="mb-3 ltr:mr-14 rtl:ml-14 lg:p-10">
                                       <h6 class="mb-3 text-sm text-gray-900 uppercase dark:text-gray-50">We have 150,000+ projects</h6>
                                       <h1 class="mb-3 text-5xl font-semibold leading-tight text-gray-900 dark:text-gray-50">Find the perfect professional for you with <span class="font-bold group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">Renovation Ph</span></h1>
                                       <p class="text-lg font-light text-gray-500 whitespace-pre-line dark:text-gray-300">
@@ -109,31 +109,31 @@ onMounted(() => {
                                         </p>
                             </div>
                             <form action="#">
-                                <div class="registration-form">
+                                <div class="registration-form w-full">
                                     <div class="grid grid-cols-12">
-                                        <div class="col-span-12 xl:col-span-4">
+                                        <div class="col-span-12 xl:col-span-6">
                                             <div class="mt-3 rounded-l filter-search-form filter-border mt-md-0">
                                                 <i class="uil uil-briefcase-alt"></i>
                                                 <input type="search" id="job-title" class="w-full filter-input-box placeholder:text-gray-100 placeholder:text-13 dark:text-gray-100" placeholder="professional, projects    ...">
                                             </div>
                                         </div><!--end col-->
-                                        <div class="col-span-12 xl:col-span-4">
-                                            <ClientOnly>
-                                                <DropDown :config="locationDropdownConfig" />  
-                                            </ClientOnly>                                              
-                                        </div><!--end col-->
+                                       
                                         <div class="col-span-12 xl:col-span-4">
                                             <div class="h-full mt-3">
-                                                <button class="btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border rounded-lg border-transparent ltr:xl:rounded-l-none rtl:xl:rounded-r-none w-full py-[18px] text-white" type="submit"><i class="uil uil-search me-1"></i> Find Job</button>
+                                                <button class="btn group-data-[theme-color=violet]:bg-violet-500
+                                                 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500
+                                                  group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500
+                                                   group-data-[theme-color=blue]:bg-blue-500 border rounded-lg border-transparent ltr:xl:rounded-l-none 
+                                                   rtl:xl:rounded-r-none w-full lg:w-auto py-[18px]  text-white " type="submit"><i class="uil uil-search me-1"></i> </button>
                                             </div>
                                         </div><!--end col-->
                                     </div><!--end row-->
                                 </div>
                             </form>
                         </div>
-                        <div class="col-span-5">
+                        <div class="col-span-12 lg:col-span-5">
                             <div class="mt-5">
-                                <img src="assets/images/cover.svg" alt="" class="mb-5 home-img max-w-none"> 
+                                <img src="assets/images/cover.svg" alt="" class="mb-5 max-w-full"> 
                             </div>
                         </div>
                     </div>
@@ -160,7 +160,7 @@ onMounted(() => {
                             <div class="p-2 mt-3 transition-all duration-500 bg-white rounded shadow-lg shadow-gray-100/50 card dark:bg-neutral-800 dark:shadow-neutral-600/20 group/blog">
                                 <div class="relative overflow-hidden">
                                         <img :src="category.img" alt="" class="rounded">
-                                        <div class="absolute inset-0 hidden transition-all duration-500 rounded-md bg-black/30 group-hover/blog:block"></div>
+                                        <div class="absolute inset-0 hidden transition-all duration-500 rounded-md bg-black/40 group-hover/blog:block"></div>
                                         
                                         <div class="hidden bottom-2 left-2 group-hover/blog:block author group-hover/blog:absolute">
                                             <ul class="mb-0 list-unstyled">

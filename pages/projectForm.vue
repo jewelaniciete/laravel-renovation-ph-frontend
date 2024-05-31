@@ -111,7 +111,7 @@ async function uploadProject() {
     <div class="page-content">
       <section class="relative py-28 lg:py-20">
         <div class="container mx-auto">
-          <div class="lg:grid flex lg:grid-cols-2">
+          <div class="grid lg:grid-cols-2 grid-row-2">
             <div class=" w-70 mx-auto bg-white p-6">
               <form @submit.prevent="uploadProject">
                 <p class="text-4xl px-3 text-gray-500">Upload a project</p><br>

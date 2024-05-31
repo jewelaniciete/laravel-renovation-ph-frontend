@@ -50,6 +50,6 @@ async function fetchProjinfo() {
 
 <template>
    <div>
-    <p>{{ projInfo.length }} Projects</p>
+    <p class="lg:justify-end">{{ projInfo.length }} Projects</p>
   </div>
 </template>

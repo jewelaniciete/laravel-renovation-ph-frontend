@@ -99,6 +99,7 @@ async function clientView() {
           <div
             class="p-2 transition-all duration-500 bg-white rounded-md dark:bg-transparent shadow-xl dark:shadow-none">
             <div v-for="media in proj.project_media" :key="media.id">
+              
           <img :src="media.profile_routes[0]" v-if="media.profile_routes.length > 0" class="imgCrd p-1" />
         </div>      
          <div class="p-5">

@@ -95,14 +95,14 @@ async function profileView() {
                                                 <div class="flex flex-row w-full">
                                                     <div class="relative flex items-end justify-start w-full gap-3 mt-6 flex-cols">
                                                         <div class="flex items-start justify-start">
-                                                            <img id="profile-img" :src="profile.profile_route" alt="" class="w-48 h-48">
+                                                            <img id="profile-img" :src="profile.profile_route" alt="" class=" w-48 h-48 border-4 ">
                                                         </div>
                                                         <div class="flex flex-col mt-3">
                                                             <h6 class="text-2xl font-bold text-gray-900 dark:text-gray-50"> {{ client.first_name }} {{ client.last_name }} </h6>
                                                             <p class="mt-1 text-gray-500 dark:text-gray-300">{{ client.user_name }}</p>
                                                         </div>
                                                     </div>
-                                                    <div class="flex justify-end w-full p-5 items-right">
+                                                    <div class="flex justify-end p-5 items-right">
                                                         <NuxtLink to="/client-edit"><img src="assets/images/logo/editt.svg" alt="" class="w-6 h-6" ></NuxtLink>
                                                     </div>
                                                 </div>
@@ -124,7 +124,7 @@ async function profileView() {
                                                 <hr class="mt-3 border-gray-200">
                                                 <div class="flex flex-row w-full gap-3 mt-10">
                                                     <div class="flex items-start justify-start w-full text-2xl font-semibold">
-                                                        <p class="w-full text-gray-400"> <project-count /> </p>
+                                                        <p class="w-full text-gray-400 "> <project-count /> </p>
                                                     </div>
                                                 </div>
                                                 <section class="py-16">
