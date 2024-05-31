@@ -1,6 +1,4 @@
-<script setup>
-import { ref, onMounted } from 'vue';
-
+<script>
 definePageMeta({
     layout: 'template-default'
 })
@@ -97,12 +95,12 @@ async function profileView() {
                                                             <img id="profile-img" :src="profile.profile_route" alt="" class="w-48 h-48">
                                                         </div>
                                                         <div class="flex flex-col mt-3">
-                                                            <h6 class="text-2xl font-bold text-gray-900 dark:text-gray-50"> {{ client.first_name }} {{ client.last_name }} </h6>
-                                                            <p class="mt-1 text-gray-500 dark:text-gray-300">{{ client.user_name }}</p>
+                                                            <h6 class="text-2xl font-bold text-gray-900 dark:text-gray-50">James Bond</h6>
+                                                            <p class="mt-1 text-gray-500 dark:text-gray-300">Lowkey man</p>
                                                         </div>
                                                     </div>
                                                     <div class="flex justify-end w-full p-5 items-right">
-                                                        <a href="https://www.youtube.com/watch?v=eRYZVkxHBls"><img src="assets/images/logo/editt.svg" alt="" class="w-6 h-6" ></a>
+                                                        <NuxtLink to="/client-edit"><img src="assets/images/logo/editt.svg" alt="" class="w-6 h-6" ></NuxtLink>
                                                     </div>
                                                 </div>
 
@@ -135,18 +133,20 @@ async function profileView() {
                                                             <div class="col-span-12 lg:col-span-12">
                                                                 <div class="grid grid-cols-12 md:gap-5">
                                                                     <div class="col-span-12 lg:col-span-4">
-                                                                        <NuxtLink to="/projectForm" class="flex flex-col items-center justify-center h-full p-2 transition-all duration-500 bg-gray-400 border-2 border-dashed rounded-md hover:bg-gray-300 hover:underline dark:bg-transparent dark:shadow-none">
+                                                                        <div class="flex flex-col items-center justify-center p-2 transition-all duration-500 bg-gray-400 border-2 border-dashed rounded-md h-72 hover:bg-gray-500 hover:underline dark:bg-transparent dark:shadow-none">
                                                                             <div>
-                                                                                <div class="w-auto mt-6 text-center">
-                                                                                    <div class="flex flex-col items-center justify-center h-full p-10">
+                                                                                <div class="w-auto mt-6 text-center h-80">
+                                                                                    <button class="flex flex-col items-center justify-center p-10">
                                                                                         <img src="assets/images/renovation/add.svg" alt="" class="w-16 h-16">
                                                                                         <p class="text-3xl font-semibold text-gray-900">New Project</p>
-                                                                                    </div>
+                                                                                    </button>
                                                                                 </div>
                                                                             </div>
                                                                         </NuxtLink>
                                                                     </div>
-                                                                    <div class="col-span-12 lg:col-span-4">
+
+                                                                    <proj-card />
+                                                                    <!-- <div class="col-span-12 lg:col-span-4">
                                                                         <div class="p-2 transition-all duration-500 bg-white rounded-md shadow-md dark:bg-transparent dark:shadow-none">
                                                                             <img src="assets/images/blog/img-05.jpg" alt="" class="img-fluid">
                                                                             <div class="p-5">
@@ -165,8 +165,8 @@ async function profileView() {
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-span-12 lg:col-span-4">
+                                                                    </div> -->
+                                                                    <!-- <div class="col-span-12 lg:col-span-4">
                                                                         <div class="p-2 transition-all duration-500 bg-white rounded-md shadow-md dark:bg-transparent dark:shadow-none">
                                                                             <img src="assets/images/blog/img-06.jpg" alt="" class="img-fluid">
                                                                             <div class="p-5">
@@ -185,7 +185,7 @@ async function profileView() {
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
+                                                                    </div> -->
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -7,45 +7,19 @@ definePageMeta({
   layout: 'template-default'
 })
 
-// interface CostVal {
-//   cost_min: number;
-//   cost_max: number;
-//   id: number;
-// }
-// onMounted(async () => {
-//   await costRange();
-// });
-
-
-// const costValue = ref<CostVal[]>([]);
-
-async function costRange() {
-  const response = await fetch(`http://localhost:8000/api/master/cost-range-show`, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-  });
-  const data = await response.json();
-  costValue.value = data.data;
-}
-
 /* project upload endpoint */
-const file = ref({});
+const files = ref([]);  // Initialize as an array to handle multiple files
 const formData = ref({
   name: '',
   cost: '',
   start_date: '',
   end_date: '',
-  // file: '',
 });
 
 function onChangeFile(event) {
-  file.value = event.target.files[0];
-  console.log(file.value);
+  files.value = Array.from(event.target.files);
+  console.log(files.value);
 }
-
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -56,10 +30,6 @@ function getCookie(name) {
   }
   return null;
 }
-
-onMounted(async () => {
-  await uploadProject();
-});
 
 async function uploadProject() {
   const accessToken = getCookie('access_token');
@@ -75,65 +45,66 @@ async function uploadProject() {
     return;
   }
 
-  // let endpoint = 'clients';
-  // if (userType === 'professional') {
-  //   endpoint = 'professionals';
-  // }
-  try {
-        if (!file.value) return;
+  if (files.value.length === 0) {
+    console.log('Files are not selected');
+    return;
+  }
 
-        const body = new FormData();
-        body.append('file', file.value, file.value.name);
-  console.log(formData.value);
-
-  const response = await fetch(`http://localhost:8000/api/professionals/project-store`, {
-    method: 'POST',
-    body: JSON.stringify(formData),
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    },
+  const body = new FormData();
+  files.value.forEach(file => {
+    body.append('file[]', file);  // Append each file to the form data
   });
+  body.append('name', formData.value.name);
+  body.append('cost', formData.value.cost);
+  body.append('start_date', formData.value.start_date);
+  body.append('end_date', formData.value.end_date);
 
-  if (response.ok) {
-    // Show success toast
-    Toastify({
-      text: `${userType.charAt(0).toUpperCase() + userType.slice(1)} Project Posted!`,
-      duration: 3000, // duration in milliseconds
-      gravity: "top", // `top` or `bottom`
-      position: "right", // `left`, `center` or `right`
-      background: "#4caf50", // green
-    }).showToast();
-  } else {
-    console.error(`Failed to upload project of ${userType} data:`, response.statusText);
+  try {
+    const response = await fetch(`http://localhost:8000/api/professionals/project-store`, {
+      method: 'POST',
+      body: body,
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+    });
 
-    // Show error toast
+    if (response.ok) {
+      Toastify({
+        text: `${userType.charAt(0).toUpperCase() + userType.slice(1)} Project Posted!`,
+        duration: 3000, // duration in milliseconds
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        background: "#4caf50", // green
+      }).showToast();
+
+      setTimeout(() => {
+        window.location.href = '/professional-profile'; // Change the URL to your home page
+      }, 1000);
+    } else {
+      console.error(`Failed to upload project of ${userType} data:`, response.statusText);
+
+      Toastify({
+        text: `Failed to upload project of ${userType} data: ${response.statusText}`,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        background: "#f44336", // red
+      }).showToast();
+    }
+  } catch (err) {
+    console.error(`Error during uploading project:`, err);
+
     Toastify({
-      text: `Failed to upload project of ${userType} data: ${response.statusText}`,
+      text: `Error during uploading project: ${err.message}`,
       duration: 3000,
       gravity: "top",
       position: "right",
       background: "#f44336", // red
     }).showToast();
   }
-} catch (err) {
-        console.error(`Error during uploading project:`, err);
-
-        // Show error toast
-        // Toastify({
-        //     text: `Error during uploading project: ${err.message}`,
-        //     duration: 3000,
-        //     gravity: "top",
-        //     position: "right",
-        //     background: "#f44336", // red
-        // }).showToast();
-    }
 }
-
 </script>
-
-
 
 <template>
   <div class="main-content bg-gray-400">
@@ -147,16 +118,12 @@ async function uploadProject() {
                 <p class="text-gray-400 px-3">A project is a compilation of images of your own creations. </p>
                 <div class="grid grid-cols-2">
                   <div class="p-3">
-                    <label class="text-xl  text-gray-500">Project Title</label><br>
+                    <label class="text-xl text-gray-500">Project Title</label><br>
                     <input type="text" v-model="formData.name" placeholder="Project Title"
                       class="text-black placeholder:text-gray-100" />
                   </div>
                   <div class="p-3">
                     <label class="text-xl text-gray-500">Cost</label><br>
-                    <!-- <select v-model="formData.cost" class="text-black w-custom1">
-                      <option  v-for="(cost, index) in costValue" :key="index" class="text-gray-400">{{ cost.cost_min }}
-                        - {{ cost.cost_max }}</option>
-                    </select> -->
                     <input type="number" placeholder="Add Cost" v-model="formData.cost"
                       class="text-black placeholder:text-gray-100" />
                   </div>
@@ -170,10 +137,9 @@ async function uploadProject() {
                     <label class="text-gray-500">End of project</label><br />
                     <input v-model="formData.end_date" type="date" class="text-black" />
                   </div>
-
                 </div>
 
-                <!--Input Image-->
+                <!-- Input Image -->
                 <div class="flex items-center justify-center w-full py-6">
                   <label for="dropzone-file"
                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -187,19 +153,15 @@ async function uploadProject() {
                           upload </span> or drag and drop</p>
                       <p class="text-xs text-gray-500 dark:text-gray-400">PNG, or JPG (MAX. 100MB)</p>
                     </div>
-                    <div v-if="imageUrl" class="mt-4">
-                      <img :src="imageUrl" alt="Image Preview" class="h-auto max-w-full rounded">
-                    </div>
                     <input id="dropzone-file" type="file" class="hidden" multiple accept=".png, .jpg"
                       @change="onChangeFile" />
                   </label>
                 </div>
                 <div>
-                  <button type="submit" @change="uploadProject" class="bg-gray-500 p-3 px-4 float-right rounded-md">
+                  <button type="submit" class="bg-gray-500 p-3 px-4 float-right rounded-md hover:bg-gray-800">
                     Post
                   </button>
                 </div>
-
               </form>
             </div>
 
@@ -242,32 +204,3 @@ async function uploadProject() {
 
 
 <style></style>
-
-<script>
-export default {
-  data() {
-    return {
-      imageUrl: null,
-    
-    };
-  },
-  methods: {
-    onChangeFile(event) {
-      const file = event.target.files[0];
-      if (file) {
-        this.imageUrl = URL.createObjectURL(file);
-      }
-    },
-    uploadProject() {
-
-      console.log('Image URL:', this.imageUrl);
-
-      this.imageUrl = null;
-
-    }
-  },
-  computed: {
-    // Add necessary computed properties here
-  }
-};
-</script>
