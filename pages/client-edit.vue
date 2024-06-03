@@ -8,9 +8,14 @@ definePageMeta({
   layout: 'template-default'
 })
 
+const showProfile = ref(false);
+
+
 onMounted(async () => {
   await userView();
   await profileView();
+  showProfile.value = true;
+
 });
 
 const client = ref({});
@@ -55,7 +60,9 @@ const profileUpdate = async () => {
         backgroundColor: "#4caf50",
       }).showToast();
 
-      refreshPage();
+      setTimeout(() => {
+        window.location.href = '/client-edit'; // Change the URL to your home page
+      }, 1000);
       }else{
         console.error(`Failed to update ${userType} profile:`, response.statusText);
         Toastify({
@@ -209,7 +216,7 @@ const passwordForm = ref({
                         </div>
 
                         <div class="flex flex-row w-full">
-                          <div class="relative flex-col items-start justify-start mt-custom ml-custom">
+                          <div v-if="showProfile" class="relative flex-col items-start justify-start mt-custom ml-custom">
                             <div class="flex items-start justify-start">
                               <NuxtLink href="#profile" @click.prevent="showModal = true">
                                   <img id="profile-img" :src="profile.profile_route" alt="" class="w-48 h-48 border-4 rounded-full">
@@ -249,6 +256,21 @@ const passwordForm = ref({
                               </div>
                             </div>
                           </div>
+
+                          <div v-else
+                                                    class="relative flex-col items-start justify-start w-full mt-custom ml-custom">
+                                                    <div class="flex items-start justify-start">
+                                                        <img src="assets/images/renovation/default.jpg" alt=""
+                                                            class="w-48 h-48 border-4 rounded-full">
+                                                    </div>
+
+                                                    <div class="mt-3">
+                                                        <h6 class="text-2xl font-bold text-gray-900 dark:text-gray-50">
+                                                            Loading....</h6>
+                                                        <p class="mt-1 text-gray-500 dark:text-gray-300">
+                                                           Loading....</p>
+                                                    </div>
+                                                </div>
                         </div>
                       </div>
                     </div>
@@ -264,19 +286,19 @@ const passwordForm = ref({
                         <div v-for="tab in items" :key="tab.tab" class="flex-auto">
                           <li class="flex-auto mr-2 -mb-px text-center last:mr-0">
                             <a
-                              class="block px-5 py-3 text-xs font-bold leading-normal uppercase rounded shadow-xl cursor-pointer"
+                              class="block px-5 py-3 text-xs font-bold leading-normal uppercase rounded text-gray-400 shadow-xl cursor-pointer"
                               @click="openTab = tab.tab"
-                              :class="{'text-green-700 bg-white': openTab !== tab.tab, 'text-white bg-green-500\/75': openTab === tab.tab}">
+                              :class="{'text-green-700 bg-white': openTab !== tab.tab, 'text-gray-900 bg-green-500\/75': openTab === tab.tab}">
                               {{ tab.title }}
                             </a>
                           </li>
                         </div>
                       </ul>
                       <div class="relative flex flex-col w-full min-w-0 mb-4 break-words bg-white shadow-lg rounded-xl">
-                        <div class="flex-auto px-4 py-5">
-                          <div v-for="tab in items" :key="tab.tab" class="tab-content tab-space">
+                        <div class="flex-auto px-4 py-5  ">
+                          <div v-for="tab in items" :key="tab.tab" class="tab-content tab-space ">
                             <div :class="{'hidden': openTab !== tab.tab, 'block': openTab === tab.tab}">
-                              <div class="px-1 py-2 font-normal text-gray-600 h-28 md:h-24">
+                              <div class="px-1 py-2 font-normal h-28 md:h-24">
                                 <p class="text-base">
                                   <template v-if="tab.tab === 1">
                                     <AccountForm />

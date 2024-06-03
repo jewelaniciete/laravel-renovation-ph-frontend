@@ -9,6 +9,7 @@ definePageMeta({
 
 /* project upload endpoint */
 const files = ref([]);  // Initialize as an array to handle multiple files
+const previews = ref([]);  // Initialize for image previews
 const formData = ref({
   name: '',
   cost: '',
@@ -18,6 +19,14 @@ const formData = ref({
 
 function onChangeFile(event) {
   files.value = Array.from(event.target.files);
+  previews.value = [];
+  files.value.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      previews.value.push(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  });
   console.log(files.value);
 }
 
@@ -109,33 +118,33 @@ async function uploadProject() {
 <template>
   <div class="main-content bg-gray-400">
     <div class="page-content">
-      <section class="relative py-28 lg:py-20">
+      <section class="relative py-28">
         <div class="container mx-auto">
-          <div class="grid lg:grid-cols-2 grid-row-2">
-            <div class=" w-70 mx-auto bg-white p-6">
+          <div class="grid grid-cols-1 md:grid-cols-2">
+            <div class="w-70 md:w-20 mx-auto bg-white p-6">
               <form @submit.prevent="uploadProject">
                 <p class="text-4xl px-3 text-gray-500">Upload a project</p><br>
-                <p class="text-gray-400 px-3">A project is a compilation of images of your own creations. </p>
-                <div class="grid grid-cols-2">
+                <p class="text-gray-400 px-3">A project is a compilation of images of your own creations.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div class="p-3">
                     <label class="text-xl text-gray-500">Project Title</label><br>
                     <input type="text" v-model="formData.name" placeholder="Project Title"
-                      class="text-black placeholder:text-gray-100 lg:w-auto w-30" />
+                      class="w-full text-black placeholder:text-gray-100" />
                   </div>
                   <div class="p-3">
                     <label class="text-xl text-gray-500">Cost</label><br>
                     <input type="number" placeholder="Add Cost" v-model="formData.cost"
-                      class="text-black placeholder:text-gray-100 lg:w-auto w-30" />
+                      class="w-full text-black placeholder:text-gray-100" />
                   </div>
                 </div>
-                <div class="grid lg:grid-cols-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div class="p-3">
                     <label class="text-gray-500">Start of project</label><br />
-                    <input v-model="formData.start_date" type="date" class="text-black" />
+                    <input v-model="formData.start_date" type="date" class="w-full text-black" />
                   </div>
                   <div class="p-3">
                     <label class="text-gray-500">End of project</label><br />
-                    <input v-model="formData.end_date" type="date" class="text-black" />
+                    <input v-model="formData.end_date" type="date" class="w-full text-black" />
                   </div>
                 </div>
 
@@ -155,18 +164,24 @@ async function uploadProject() {
                     </div>
                     <input id="dropzone-file" type="file" class="hidden" multiple accept=".png, .jpg"
                       @change="onChangeFile" />
+                       <!-- Image Previews -->
+              <div v-if="previews.length" class="py-6">
+                <div class="mt-4 flex">
+                  <img v-for="(preview, index) in previews" :key="index" class="size-2 rounded-sm" :src="`${preview}`" />
+                </div>
+              </div>
                   </label>
                 </div>
                 <div>
-                  <button type="submit" class="bg-gray-500 p-3 px-4 float-right rounded-md hover:bg-gray-800">
+                  <button type="submit" class="bg-gray-500 p-3 px-4 float-right rounded-md">
                     Post
                   </button>
                 </div>
               </form>
+             
             </div>
 
-            <div class="w-30 h-60 mx-auto bg-white p-6 text-black">
-
+            <div class="w-30 h-60 mx-auto bg-white p-6 text-black lg:block hidden">
               <p class="text-2xl font-semibold">Photo Guidelines</p>
               <p>Photos that do not meet these guidelines will be removed.</p>
 
@@ -197,10 +212,4 @@ async function uploadProject() {
       </section>
     </div>
   </div>
-
-
 </template>
-
-
-
-<style></style>

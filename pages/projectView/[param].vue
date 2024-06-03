@@ -2,17 +2,17 @@
 interface ProjectMedia {
   id: number;
     file: string;
-
   profile_routes: string;
 }
 
 interface ProjectData {
   name: string;
+  id: number;
   start_date: string;
   end_date: string;
   slug: string;
   cost: number;
-  project_media: ProjectMedia[];
+  media: ProjectMedia[];
 }
 
 interface Project {
@@ -20,6 +20,7 @@ interface Project {
 }
 
 interface Proj {
+  id: number;
   name: string;
   slug: string;
 }
@@ -45,14 +46,6 @@ function getCookie(name: string): string | null {
   return null;
 }
 
-const adjustMediaUrls = (mediaArray: ProjectMedia[]) => {
-  return mediaArray.map(media => {
-    return {
-      ...media,
-      profile_routes: `http://localhost:8000/storage/uploads/projects/${media.profile_routes}`
-    };
-  });
-};
 
 const fetchProject = async (param: string) => {
   const accessToken = getCookie('access_token');
@@ -77,7 +70,6 @@ const fetchProject = async (param: string) => {
     }
 
     const data = await response.json();
-    data.data.project_media = adjustMediaUrls(data.data.project_media);
     project.value = data as Project;
   } catch (err) {
     error.value = err as Error;
@@ -126,11 +118,13 @@ async function fetchProjinfo() {
                 <p class="text-xl">{{ project.data.name }}</p>
                 <p class="text-base">Project Duration: {{ project.data.start_date }} - {{ project.data.end_date }}</p>
                 <p class="text-base">Project Cost: {{ project.data.cost }}</p>
-                <div v-if="project.data.project_media" class="space-y-3">
-                  <NuxtLink :to="`/editProject/${project.data.slug}`"  class="bg-gray-btn border p-2 rounded-md hover:bg-gray-500 hover:text-white">Edit Project</NuxtLink>
+                <div v-if="project.data.media" class="space-y-3">
+                  <NuxtLink :to="`/editProject/${project.data.id}`"  class="bg-gray-btn border p-2 rounded-md hover:bg-gray-500 hover:text-white">Edit Project</NuxtLink>
                   <h3>Project Media</h3>
-                  <div v-for="media in project.data.project_media" :key="media.id">
+                  <div class="flex">
+                  <div v-for="media in project.data.media" :key="media.id">
                     <img :src="media.profile_routes" class="pv p-1" />
+                  </div>
                   </div>
                 </div>
               </div>
@@ -145,7 +139,7 @@ async function fetchProjinfo() {
                 <ul class="text-sm space-y-2">
                   <li class="list-item"><NuxtLink to="/professional-profile"> All Projects </NuxtLink></li>
                   <li v-for="(proj, index) in projInfo" :key="index" class="list-item">
-                    <NuxtLink :to="`/projectView/${proj.slug}`" class="form-text" aria-current="page">{{ proj.name }}</NuxtLink>
+                    <NuxtLink :to="`/projectView/${proj.id}`" class="form-text" aria-current="page">{{ proj.name }}</NuxtLink>
                   </li>
                 </ul>
               </div>

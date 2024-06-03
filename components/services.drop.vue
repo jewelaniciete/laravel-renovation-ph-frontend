@@ -1,26 +1,38 @@
 <template>
-  <div class="flex">
-    <div v-for="category in categoryDropdown" :key="category.id" class="category-container-service">
-      <div class="category-name">
-        <p class="text-base font-semibold select-none">{{ category.name }}</p>
+  <div>
+    <!-- Tabs for categories -->
+    <div class="flex border-b">
+      <div 
+        v-for="category in categoryDropdown" 
+        :key="category.id" 
+        @click="selectedCategory = category.id" 
+        class="cursor-pointer py-2 px-4 text-base font-semibold"
+        :class="{'border-b-2 border-green-500': selectedCategory === category.id}"
+      >
+        {{ category.name }}
       </div>
-      <ul class=" subcategory-list" aria-labelledby="pages">       
-        <li  v-for="sub in subcategoryDropdown.filter(sub => sub.category_id === category.id)" 
-          :key="sub.category_id">
+    </div>
+
+    <!-- Content for selected tab -->
+    <div class="p-4">
+      <ul v-if="selectedCategory" aria-labelledby="pages">       
+        <li  
+          v-for="sub in subcategoryDropdown.filter(sub => sub.category_id === selectedCategory)" 
+          :key="sub.slug"
+        >
           <NuxtLink
             :to="`/services/${sub.slug}`"
-            class="subcategory-item">
-          {{ sub.name }}
-        </NuxtLink>
+            class="subcategory-item"
+          >
+            {{ sub.name }}
+          </NuxtLink>
         </li>
-
       </ul>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-
 
 // Define types for category and subcategory
 interface Category {
@@ -39,11 +51,15 @@ interface Subcategory {
 // Then use these types for your dropdowns
 const categoryDropdown = ref<Category[]>([]);
 const subcategoryDropdown = ref<Subcategory[]>([]);
+const selectedCategory = ref<number | null>(null);
 
 onMounted(async () => {
   // Fetch product data when component is mounted
   await fetchCategories();
   await fetchSubCategories();
+  if (categoryDropdown.value.length > 0) {
+    selectedCategory.value = categoryDropdown.value[0].id; // Select the first category by default
+  }
 });
 
 async function fetchCategories() {
@@ -72,5 +88,10 @@ async function fetchSubCategories() {
 </script>
 
 <style scoped>
-/* Add your styles here */
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+.border-indigo-500 {
+  border-color: #6366F1;
+}
 </style>

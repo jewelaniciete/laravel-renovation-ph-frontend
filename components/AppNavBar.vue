@@ -404,10 +404,8 @@ async function logout() {
                                 <button type="button" class="flex items-center px-4 py-5 dropdown-toggle"
                                     id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="true">
-                                    <img class="size-1 lg:size-small rounded-full ltr:xl:mr-2 rtl:xl:ml-2"
-                                        :src="profile.profile_route" alt="Header Avatar">
-                                    <span
-                                        class="hidden font-medium xl:block text-gray-500 dark:text-gray-50">{{ client.user_name }}</span>
+                                    <img class="size-1 lg:size-small rounded-full ltr:xl:mr-2 rtl:xl:ml-2" :src="profile.profile_route" alt="Header Avatar">
+                                    <span class="hidden font-medium xl:block text-gray-500 dark:text-gray-50">{{ client.user_name }}</span>
                                 </button>
                                 <ul class="absolute top-auto z-50 hidden w-48 p-3 list-none bg-white border rounded shadow-lg dropdown-menu border-gray-500/20 xl:ltr:-left-3 ltr:-left-32 rtl:-right-3 dark:bg-neutral-800"
                                     id="profile/log" aria-labelledby="navNotifications">
@@ -437,8 +435,13 @@ async function logout() {
                         </div>
                     </div>
 
-                    <div v-else class="flex flex-row">
-                        Loading...
+                    <div v-else class="flex items-center px-6">
+                        <button type="button" class="flex items-center px-4 py-5 dropdown-toggle"
+                                    id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="true">
+                        <span class="size-1 lg:size-small rounded-full ltr:xl:mr-2 rtl:xl:ml-2 bg-gray-500" alt="Header Avatar"></span>
+                        <span class="hidden font-medium xl:block text-gray-200 dark:text-gray-50">Loading....</span>
+                    </button>
                     </div>
                 </div>
 

@@ -7,10 +7,13 @@ definePageMeta({
 
 const client = ref({});
 const profile = ref({});
+const showProfile = ref(false);
 
 onMounted(async () => {
     await clientView();
     await profileView();
+    showProfile.value = true;
+
 });
 
 function getCookie(name) {
@@ -91,7 +94,7 @@ async function profileView() {
                                                     alt="User Cover" class="object-cover w-full h-full rounded-t-lg" />
                                             </div>
                                             <div class="flex flex-row w-full">
-                                                <div
+                                                <div v-if="showProfile"
                                                     class="relative flex-col items-start justify-start w-full mt-custom ml-custom">
                                                     <div class="flex items-start justify-start">
                                                         <img :src="profile.profile_route" alt=""
@@ -103,6 +106,21 @@ async function profileView() {
                                                             {{ client.first_name }} {{ client.last_name }}</h6>
                                                         <p class="mt-1 text-gray-500 dark:text-gray-300">
                                                             {{ client.about_me }}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div v-else
+                                                    class="relative flex-col items-start justify-start w-full mt-custom ml-custom">
+                                                    <div class="flex items-start justify-start">
+                                                        <img src="assets/images/renovation/default.jpg" alt=""
+                                                            class="w-48 h-48 border-4 rounded-full">
+                                                    </div>
+
+                                                    <div class="mt-3">
+                                                        <h6 class="text-2xl font-bold text-gray-900 dark:text-gray-50">
+                                                            Loading....</h6>
+                                                        <p class="mt-1 text-gray-500 dark:text-gray-300">
+                                                           Loading....</p>
                                                     </div>
                                                 </div>
                                                 <div class="flex justify-end w-full p-5 items-right">
