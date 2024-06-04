@@ -11,7 +11,7 @@ const currentYear = ref(new Date().getFullYear())
                 <div class="grid grid-cols-12 lg:gap-10">
                     <div class="col-span-12 xl:col-span-4">
                         <div class="mr-12">
-                            <h4 class="text-white mb-6 text-[23px]">Jobcy</h4>
+                            <h4 class="text-white mb-6 text-[23px]">Renovation Ph</h4>
                             <p class="text-white/50 dark:text-gray-300">
                                 It is a long established fact that a reader will be of a page reader
                                 will be of at its layout.
@@ -153,9 +153,9 @@ const currentYear = ref(new Date().getFullYear())
                 <div class="text-center">
                     <p class="mb-0 text-center text-white/50">
                         {{currentYear}}
-                        © Jobcy - Job Listing Page
-                            Template by
-                        <a href="https://themeforest.net/search/themesdesign" target="_blank" class="underline transition-all duration-300 hover:text-gray-50">Themesdesign</a>
+                        © RenovationPh - modern website
+                            Develop by
+                        <a href="https://themeforest.net/search/themesdesign" target="_blank" class="underline transition-all duration-300 hover:text-gray-50">Chanz IT</a>
                     </p>
                 </div>
             </div>
