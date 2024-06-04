@@ -216,7 +216,7 @@ async function logout() {
     <nav class="navbar fixed right-0 left-0 top-0 lg:top-[44.5px] px-5 lg:px-24 transition-all duration-500 ease shadow-lg shadow-gray-200/20 bg-white border-gray-200 dark:bg-neutral-800 z-40 dark:shadow-neutral-900"
         id="navbar">
         <div class="mx-auto container-fluid">
-            <div class="flex lg:flex-wrap justify-normal lg:justify-between items-center mx-auto">
+            <div class="flex items-center mx-auto lg:flex-wrap justify-normal lg:justify-between">
                 <a href="/" class="flex items-center">
                     <img src="assets/images/renovation.svg" alt="" class="logo-dark h-[22px] block dark:hidden">
                 </a>
@@ -401,11 +401,11 @@ async function logout() {
 
                         <div>
                             <div class="relative dropdown ltr:mr-4 rtl:ml-4">
-                                <button type="button" class="flex items-center px-4 py-5 dropdown-toggle"
+                                <button type="button" class="flex items-center py-5 lg:px-4 dropdown-toggle"
                                     id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="true">
-                                    <img class="size-1 lg:size-small rounded-full ltr:xl:mr-2 rtl:xl:ml-2" :src="profile.profile_route" alt="Header Avatar">
-                                    <span class="hidden font-medium xl:block text-gray-500 dark:text-gray-50">{{ client.user_name }}</span>
+                                    <img class="rounded-full size-1 lg:size-small ltr:xl:mr-2 rtl:xl:ml-2" :src="profile.profile_route" alt="Header Avatar">
+                                    <span class="hidden font-medium text-gray-500 xl:block dark:text-gray-50">{{ client.user_name }}</span>
                                 </button>
                                 <ul class="absolute top-auto z-50 hidden w-48 p-3 list-none bg-white border rounded shadow-lg dropdown-menu border-gray-500/20 xl:ltr:-left-3 ltr:-left-32 rtl:-right-3 dark:bg-neutral-800"
                                     id="profile/log" aria-labelledby="navNotifications">
@@ -439,15 +439,15 @@ async function logout() {
                         <button type="button" class="flex items-center px-4 py-5 dropdown-toggle"
                                     id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="true">
-                        <span class="size-1 lg:size-small rounded-full ltr:xl:mr-2 rtl:xl:ml-2 bg-gray-500" alt="Header Avatar"></span>
-                        <span class="hidden font-medium xl:block text-gray-200 dark:text-gray-50">Loading....</span>
+                        <span class="bg-gray-500 rounded-full size-1 lg:size-small ltr:xl:mr-2 rtl:xl:ml-2" alt="Header Avatar"></span>
+                        <span class="hidden font-medium text-gray-200 xl:block dark:text-gray-50">Loading....</span>
                     </button>
                     </div>
                 </div>
 
                 <div id="navbar-collapse"
                     class="navbar-res items-center justify-between w-full text-sm lg:flex lg:w-auto lg:order-1 group-focus:[.navbar-toggler]:block hidden">
-                    <ul class="flex flex-col text-black dark:text-white items-start mt-5 mb-10 font-medium lg:mt-0 lg:mb-0 lg:items-center lg:flex-row"
+                    <ul class="flex flex-col items-start mt-5 mb-10 font-medium text-black dark:text-white lg:mt-0 lg:mb-0 lg:items-center lg:flex-row"
                         id="navigation-menu">
                         <li class="relative dropdown lg:mt-0">
                             <NuxtLink to="/categories">
@@ -456,7 +456,7 @@ async function logout() {
                                     Explore Spaces <i class='bx bxs-chevron-down ltr:ml-1 rtl:mr-1'></i>
                                 </button>
                             </NuxtLink>
-                            <ul class="dropdown-menu lg:absolute z-50 w-auto p-5 bg-white border-0 rounded lg:border border-gray-500/20 lg:shadow-lg dark:bg-neutral-800"
+                            <ul class="z-50 w-auto p-5 bg-white border-0 rounded dropdown-menu lg:absolute lg:border border-gray-500/20 lg:shadow-lg dark:bg-neutral-800"
                                 aria-labelledby="category">
                                 <CategoriesDrop />
                             </ul>
@@ -471,7 +471,7 @@ async function logout() {
                                     id="services" data-bs-toggle="dropdown">Discover Services <i
                                         class='align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1'></i></button>
                             </NuxtLink>
-                            <ul class="dropdown-menu lg:absolute z-50 w-auto p-5 bg-white border-0 rounded lg:border border-gray-500/20 lg:shadow-lg dark:bg-neutral-800"
+                            <ul class="z-50 w-auto p-5 bg-white border-0 rounded dropdown-menu lg:absolute lg:border border-gray-500/20 lg:shadow-lg dark:bg-neutral-800"
                                 aria-labelledby="services">
                                 <ServicesDrop />
                             </ul>

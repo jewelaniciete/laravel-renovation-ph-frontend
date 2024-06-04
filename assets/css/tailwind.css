@@ -8172,6 +8172,11 @@ body{
   height: 2.5rem !important;
 }
 
+.size-custom{
+  width: 3rem !important;
+  height: 2rem !important;
+}
+
 .size-2{
   width: 10rem !important;
   height: 10rem !important;
