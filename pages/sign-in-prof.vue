@@ -133,7 +133,7 @@ async function login() {
                                                 </button></div>
                                             </form>
                                             <div class="text-center">
-                                                <p class="text-white">Don't have an account yet? <NuxtLink to="/sign-up" class="text-white underline fw-medium"> Sign Up </NuxtLink></p>
+                                                <p class="text-white">Don't have an account yet? <NuxtLink to="/sign-up-prof" class="text-white underline fw-medium"> Sign Up </NuxtLink></p>
                                             </div>
                                             <div class="flex justify-end px-6 mx-auto mt-5 text-white max-w-7xl">
                                                <p>Sign-in as a <NuxtLink to="/sign-in" class="font-semibold text-md hover:underline"> client </NuxtLink></p>

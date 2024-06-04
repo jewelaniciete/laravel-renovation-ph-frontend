@@ -77,7 +77,7 @@ const router = useRouter();
                         <div class="col-span-12 lg:col-span-10 lg:col-start-2">
                             <div class="flex flex-col bg-white rounded-lg dark:bg-neutral-800">
                                 <div class="grid flex-col grid-cols-12">
-                                    <div class="col-span-6 ltr:rounded-l-lg rtl:rounded-r-lg">
+                                    <div class="col-span-12 lg:col-span-6 ltr:rounded-l-lg rtl:rounded-r-lg">
                                         <div class="flex flex-col items-center justify-center p-10">
                                             <a href="index.html">
                                                 <img src="assets/images/renovation.svg" alt="" class="h-[22px] block dark:hidden">

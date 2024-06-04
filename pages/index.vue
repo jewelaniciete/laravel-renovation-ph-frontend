@@ -96,11 +96,11 @@ onMounted(() => {
 <template>
     <div class="main-content">
         <div class="page-content">
-            <section class="relative bg-opacity-10 py-28 ">
+            <section class="relative py-10 bg-opacity-10 lg:py-28 ">
                 <div class="container mx-auto">
                     <div class="grid items-center grid-cols-12 rtl:gap-10">
                         <div class="col-span-12 lg:col-span-7">
-                            <div class="mb-3 ltr:mr-14 rtl:ml-14 lg:p-10">
+                            <div class="mb-3 lg:p-10">
                                       <h6 class="mb-3 text-sm text-gray-900 uppercase dark:text-gray-50">We have 150,000+ projects</h6>
                                       <h1 class="mb-3 text-5xl font-semibold leading-tight text-gray-900 dark:text-gray-50">Find the perfect professional for you with <span class="font-bold group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">Renovation Ph</span></h1>
                                       <p class="text-lg font-light text-gray-500 whitespace-pre-line dark:text-gray-300">
@@ -109,7 +109,7 @@ onMounted(() => {
                                         </p>
                             </div>
                             <form action="#">
-                                <div class="registration-form w-full">
+                                <div class="w-full registration-form">
                                     <div class="grid grid-cols-12">
                                         <div class="col-span-12 xl:col-span-6">
                                             <div class="mt-3 rounded-l filter-search-form filter-border mt-md-0">
@@ -133,7 +133,7 @@ onMounted(() => {
                         </div>
                         <div class="col-span-12 lg:col-span-5">
                             <div class="mt-5">
-                                <img src="assets/images/cover.svg" alt="" class="mb-5 max-w-full"> 
+                                <img src="assets/images/cover.svg" alt="" class="max-w-full mb-5"> 
                             </div>
                         </div>
                     </div>
@@ -144,7 +144,7 @@ onMounted(() => {
             <!-- end home -->
 
             <!-- start category -->
-            <section class="py-20 dark:bg-neutral-800">
+            <section class="py-10 lg:py-20 dark:bg-neutral-800">
                 <div class="container mx-auto">
                     <div class="grid grid-cols-1 gap-5">
                         <div class="text-center">
@@ -196,12 +196,12 @@ onMounted(() => {
                         </div>
                     </div>
                     <swiper :slidesPerView="5" :centeredSlides="false" :slidesPerGroupSkip="1" :grabCursor="true" :keyboard="{enabled: true,}"
-                            :breakpoints="{'769': {slidesPerView: 5, slidesPerGroup: 5,},}"
+                            :breakpoints="{'769': {slidesPerView: 5, slidesPerGroup: 5,}, '300': {slidesPerView: 1, slidesPerGroup: 1,},}"
                             :scrollbar="false" :navigation="true" :pagination="{clickable: true,}"
                             :modules="modules" class="mySwiper"
                             >
                         <swiper-slide v-for="(card, index) in cardData" :key="index" class="p-4">
-                            <div class="max-w-sm overflow-hidden bg-white rounded-lg shadow-lg ring-4 ring-red-500 ring-opacity-40">
+                            <div class="overflow-hidden bg-white rounded-lg shadow-lg lg:max-w-sm ring-4 ring-red-500 ring-opacity-40">
                                 <div class="relative">
                                     <img class="w-full" src="assets/images/renovation/design and planning.png" alt="Product Image">
                                 </div>
@@ -225,7 +225,7 @@ onMounted(() => {
                         </div>
                     </div>
                     <swiper :slidesPerView="5" :centeredSlides="false" :slidesPerGroupSkip="1" :grabCursor="true" :keyboard="{enabled: true,}"
-                            :breakpoints="{'769': {slidesPerView: 5, slidesPerGroup: 5,},}"
+                            :breakpoints="{'769': {slidesPerView: 5, slidesPerGroup: 5,}, '300': {slidesPerView: 1, slidesPerGroup: 1,},}"
                             :scrollbar="false" :navigation="true" :pagination="{clickable: true,}"
                             :modules="modules" class="mySwiper"
                             >
@@ -254,7 +254,7 @@ onMounted(() => {
                         </div>
                     </div>
                     <swiper :slidesPerView="5" :centeredSlides="false" :slidesPerGroupSkip="1" :grabCursor="true" :keyboard="{enabled: true,}"
-                            :breakpoints="{'769': {slidesPerView: 5, slidesPerGroup: 5,},}"
+                    :breakpoints="{'769': {slidesPerView: 5, slidesPerGroup: 5,}, '300': {slidesPerView: 1, slidesPerGroup: 1,},}"
                             :scrollbar="false" :navigation="true" :pagination="{clickable: true,}"
                             :modules="modules" class="mySwiper"
                             >
