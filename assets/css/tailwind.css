@@ -7913,6 +7913,9 @@ body{
   .lg\:mt-3{
     margin-top: 0.75rem !important;
   }
+  .lg\:ml-custom{
+    margin-left: 3rem !important;
+  }
   .lg\:block{
     display: block !important;
   }
@@ -7958,6 +7961,21 @@ body{
     -webkit-box-align: center !important;
         -ms-flex-align: center !important;
             align-items: center !important;
+  }
+  .lg\:justify-center{
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+  }
+  .lg\:justify-start{
+    -webkit-box-pack: start !important;
+        -ms-flex-pack: start !important;
+            justify-content: flex-start !important;
+  }
+  .lg\:justify-end{
+    -webkit-box-pack: end !important;
+        -ms-flex-pack: end !important;
+            justify-content: flex-end !important;
   }
   .lg\:justify-between{
     -webkit-box-pack: justify !important;

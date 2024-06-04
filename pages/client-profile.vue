@@ -93,10 +93,10 @@ async function profileView() {
                                                 <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw5fHxjb3ZlcnxlbnwwfDB8fHwxNzEwNzQxNzY0fDA&ixlib=rb-4.0.3&q=80&w=1080"
                                                     alt="User Cover" class="object-cover w-full h-full rounded-t-lg" />
                                             </div>
-                                            <div class="flex flex-row w-full">
+                                            <div class="flex flex-col w-full lg:flex-row">
                                                 <div v-if="showProfile"
-                                                    class="relative flex-col items-start justify-start w-full mt-custom ml-custom">
-                                                    <div class="flex items-start justify-start">
+                                                    class="relative flex-col items-center justify-start w-full text-center lg:items-start mt-custom lg:ml-custom lg:text-start">
+                                                    <div class="flex items-center justify-center lg:justify-start lg:items-start">
                                                         <img :src="profile.profile_route" alt=""
                                                             class="w-48 h-48 border-4 rounded-full">
                                                     </div>
@@ -110,8 +110,8 @@ async function profileView() {
                                                 </div>
 
                                                 <div v-else
-                                                    class="relative flex-col items-start justify-start w-full mt-custom ml-custom">
-                                                    <div class="flex items-start justify-start">
+                                                    class="relative flex-col items-center justify-center w-full text-center lg:text-start lg:items-start lg:justify-start mt-custom lg:ml-custom">
+                                                    <div class="flex items-center justify-center lg:items-start lg:justify-start">
                                                         <img src="assets/images/renovation/default.jpg" alt=""
                                                             class="w-48 h-48 border-4 rounded-full">
                                                     </div>
@@ -123,7 +123,7 @@ async function profileView() {
                                                            Loading....</p>
                                                     </div>
                                                 </div>
-                                                <div class="flex justify-end w-full p-5 items-right">
+                                                <div class="flex justify-center w-full p-5 lg:justify-end items-right">
                                                     <NuxtLink to="/client-edit"> <img src="assets/images/logo/editt.svg"
                                                             alt="" class="w-6 h-6"> </NuxtLink>
                                                 </div>
