@@ -4360,6 +4360,12 @@ body{
 .pt-8{
   padding-top: 2rem !important;
 }
+.order-1 {
+  order: 1;
+}
+.order-2 {
+  order: 2;
+}
 .text-left{
   text-align: left !important;
 }
@@ -7843,6 +7849,12 @@ body{
   }
 }
 @media (min-width: 960px){
+  .lg\:order-2 {
+    order: 2;
+  }
+  .lg\:order-1 {
+    order: 1;
+}
   .lg\:absolute{
     position: absolute !important;
   }
@@ -7950,6 +7962,9 @@ body{
   }
   .lg\:w-auto{
     width: auto !important;
+  }
+  .lg\:w-custom{
+    width:27rem !important;
   }
   .lg\:max-w-md{
     max-width: 28rem !important;
@@ -8196,6 +8211,10 @@ body{
 .size-custom{
   width: 3rem !important;
   height: 2rem !important;
+}
+.size-28{
+  width: 7rem; /* 112px */
+  height: 7rem; /* 112px */
 }
 
 .size-2{

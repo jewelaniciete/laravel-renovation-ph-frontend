@@ -30,6 +30,8 @@ function onChangeFile(event) {
   console.log(files.value);
 }
 
+//limit at 6 files only
+
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -116,16 +118,16 @@ async function uploadProject() {
 </script>
 
 <template>
-  <div class="main-content bg-gray-400">
+  <div class="bg-gray-400 main-content">
     <div class="page-content">
       <section class="relative py-28">
         <div class="container mx-auto">
-          <div class="grid grid-cols-1 md:grid-cols-2">
-            <div class="w-70 md:w-20 mx-auto bg-white p-6">
+          <div class="flex flex-col gap-5 lg:flex-row">
+            <div class="order-2 w-full p-6 mx-auto bg-white lg:order-1">
               <form @submit.prevent="uploadProject">
-                <p class="text-4xl px-3 text-gray-500">Upload a project</p><br>
-                <p class="text-gray-400 px-3">A project is a compilation of images of your own creations.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <p class="px-3 text-4xl text-gray-500">Upload a project</p><br>
+                <p class="px-3 text-gray-400">A project is a compilation of images of your own creations.</p>
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div class="p-3">
                     <label class="text-xl text-gray-500">Project Title</label><br>
                     <input type="text" v-model="formData.name" placeholder="Project Title"
@@ -137,7 +139,7 @@ async function uploadProject() {
                       class="w-full text-black placeholder:text-gray-100" />
                   </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div class="p-3">
                     <label class="text-gray-500">Start of project</label><br />
                     <input v-model="formData.start_date" type="date" class="w-full text-black" />
@@ -165,15 +167,15 @@ async function uploadProject() {
                     <input id="dropzone-file" type="file" class="hidden" multiple accept=".png, .jpg"
                       @change="onChangeFile" />
                        <!-- Image Previews -->
-              <div v-if="previews.length" class="py-6">
-                <div class="mt-4 flex">
-                  <img v-for="(preview, index) in previews" :key="index" class="size-2 rounded-sm" :src="`${preview}`" />
-                </div>
-              </div>
+                    <div v-if="previews.length" class="py-6">
+                      <div class="flex flex-wrap mt-4">
+                        <img v-for="(preview, index) in previews" :key="index" class="p-2 rounded-sm size-28 " :src="`${preview}`" />
+                      </div>
+                    </div>
                   </label>
                 </div>
                 <div>
-                  <button type="submit" class="bg-gray-500 p-3 px-4 float-right rounded-md">
+                  <button type="submit" class="float-right p-3 px-4 bg-gray-500 rounded-md">
                     Post
                   </button>
                 </div>
@@ -181,7 +183,7 @@ async function uploadProject() {
              
             </div>
 
-            <div class="w-30 h-60 mx-auto bg-white p-6 text-black lg:block hidden">
+            <div class="order-1 w-full p-6 text-black bg-white lg:order-2 lg:w-custom h-60">
               <p class="text-2xl font-semibold">Photo Guidelines</p>
               <p>Photos that do not meet these guidelines will be removed.</p>
 
@@ -189,7 +191,7 @@ async function uploadProject() {
               <div class="flex gap-6">
                 <img src="/assets/images/renovation/dos.svg" />
 
-                <ul class="list-disc text-xs">
+                <ul class="text-xs list-disc">
                   <li>Photos of residential spaces</li>
                   <li>Large Photos (1000 pixels wide or more)</li>
                   <li>SGV, PNG or JPG is accepted</li>
@@ -200,7 +202,7 @@ async function uploadProject() {
               <label class="text-red-500">Don'ts</label>
               <div class="flex gap-6">
                 <img src="/assets/images/renovation/donts.svg" />
-                <ul class="list-disc text-xs">
+                <ul class="text-xs list-disc">
                   <li>Photos of commercial or office spaces Small Photos PDF</li>
                   <li>Multi-Page TIFF or EPS file formats</li>
                   <li>Low Quality Photos</li>
