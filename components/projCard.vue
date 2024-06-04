@@ -38,7 +38,6 @@ function getCookie(name: string): string | null {
 
 const showCard = ref(false);
 
-
 onMounted(async () => {
   await fetchProjinfo();
   await clientView();

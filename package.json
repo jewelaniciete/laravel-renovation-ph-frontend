@@ -17,6 +17,7 @@
     "glightbox": "3.2.0",
     "gumshoejs": "^5.1.2",
     "masonry-layout": "^4.2.2",
+    "moment": "^2.30.1",
     "nouislider": "^15.7.1",
     "nuxt": "^3.11.2",
     "nuxt-swiper": "^1.2.2",

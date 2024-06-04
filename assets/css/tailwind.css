@@ -8192,6 +8192,17 @@ body{
 
 }
 
+.imgCrd-modern{
+  height: 250px !important;
+  width: 100% !important;
+  border-radius: 8px;
+  /* object-fit: contain; */
+  /* object-fit: fill; */
+  object-fit: cover;
+
+}
+
+
 .pv{
   height: 15rem !important;
   width: 15rem !important;

@@ -812,3 +812,77 @@ export default {
   }
 };
 </script> -->
+
+
+//blog-masonary
+
+<!-- <template>
+  <div class="main-content">
+    <div class="page-content">
+
+      <section
+        class="pt-28 lg:pt-44 pb-18 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 dark:bg-neutral-900 bg-[url('../images/home/page-title.png')] bg-center bg-cover relative">
+        <div class="container mx-auto">
+          <div class="grid">
+            <div class="col-span-12">
+              <div class="text-center text-white">
+                <h3 class="mb-4 text-[26px]">Gallery</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="assets/images/about/shape.png" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
+        <img src="assets/images/about/shape-dark.png" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
+      </section>
+
+  
+      <section class="py-16">
+        <div class="container mx-auto">
+          <div class="grid grid-cols-12 gap-y-5 sm:gap-8">
+            <div class="col-span-12 flex md:col-span-6 lg:col-span-4" v-for="project in projects" :key="project.id">
+              <div class="project relative space-x-6">
+                <div class="p-2 overflow-hidden border-0 shadow card blog-masonry-box">
+                  <div>
+                    <div v-if="project.media.length > 0" class="media relative">
+                      <img :src="project.media[0].profile_routes[0]" alt="Project Media" class="imgCrd p-1" />
+                      <div
+                        class="absolute inset-0 transition-all duration-500 rounded-md bg-black opacity-0 group-hover:opacity-40">
+                      </div>
+                      <div
+                        class="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-all duration-500">
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-4 card-body">
+                    <p class="mb-2 text-gray-500 dark:text-gray-300"><b>Category</b> <i
+                        class="mdi mdi-circle-medium"></i>{{ project.created_at }}</p>
+                    <NuxtLink :to="`/galleryView/${project.id}`"
+                      class="text-gray-900 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 transition-all duration-300 ease-in-out dark:text-gray-50">
+                      <h2 class="text-2xl ">{{ project.name }}</h2>
+                    </NuxtLink>
+                    <div class="flex items-center mt-4">
+                      <div class="ltr:ml-3 rtl:mr-3">
+                        <a href="blog-author.html">
+                          <h6 class="mb-1 text-gray-900 text-16 dark:text-gray-50">{{ project.professional.first_name
+                            }}{{ project.professional.last_name }}</h6>
+                        </a>
+                        <p class="mb-0 text-sm text-gray-500 dark:text-gray-300">{{ project.professional.user_name }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+   
+
+
+    </div>
+  </div>
+</template> -->
+
