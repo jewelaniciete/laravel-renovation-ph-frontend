@@ -293,7 +293,7 @@ const passwordForm = ref({
               <div class="flex flex-col justify-center gap-5 md:gap-12 lg:flex-row">
                 <div class="flex flex-col order-2 w-full py-2 lg:w-5/12 sm:order-1">
                   <div class="">
-                    <ul class="flex flex-row flex-wrap pt-3 pb-4 mb-0 list-none w-100">
+                    <ul class="flex flex-col flex-wrap w-full pt-3 pb-4 mb-0 list-none lg:flex-row lg:w-100">
                       <div v-for="tab in items" :key="tab.tab" class="flex-auto">
                         <li class="flex-auto mr-2 -mb-px text-center last:mr-0">
                           <a class="block px-5 py-3 text-xs font-bold leading-normal text-gray-400 uppercase rounded shadow-xl cursor-pointer"
