@@ -309,7 +309,7 @@ Make sure disabled buttons don't get the pointer cursor.
 2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
    This can trigger a poorly considered lint error in some tools but is included by design.
 */
-img,
+/* img, */
 svg,
 video,
 canvas,
@@ -323,7 +323,7 @@ object {
 /*
 Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
 */
-img,
+/* img, */
 video {
   max-width: 100%;
   height: auto;
@@ -672,6 +672,10 @@ h6{
 }
 .container{
   width: 100%;
+}
+.container-gallery{
+  width: 80%;
+  margin-left: 10%;
 }
 @media (min-width: 100%){
   .container{
@@ -4206,6 +4210,10 @@ body{
 .px-7{
   padding-left: 2rem !important;
   padding-right: 2rem !important;
+}
+.px-20{
+  padding-left: 16rem !important;
+  padding-right: 16rem !important;
 }
 .px-\[18px\]{
   padding-left: 18px !important;
@@ -8153,6 +8161,20 @@ body{
   text-decoration: none;
   color: #4a5568; /* Tailwind's gray-700 */
   transition: transform 0.3s, color 0.3s;
+  
+}
+
+.subcategory-item1 {
+  display: flex;
+    padding: 5px 10px;
+  text-decoration: none;
+  color: #4a5568; /* Tailwind's gray-700 */
+  transition: transform 0.3s, color 0.3s;
+}
+
+.subcategory-item1:hover {
+  transform: translateX(5px);
+  color: #27790f;
 }
 
 .subcategory-item:hover {
@@ -8192,15 +8214,7 @@ body{
 
 }
 
-.imgCrd-modern{
-  height: 250px !important;
-  width: 100% !important;
-  border-radius: 8px;
-  /* object-fit: contain; */
-  /* object-fit: fill; */
-  object-fit: cover;
 
-}
 
 
 .pv{

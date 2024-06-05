@@ -16,13 +16,13 @@
     <!-- Content for selected tab -->
     <div class="p-4">
       <ul v-if="selectedCategory" aria-labelledby="pages">       
-        <li  
+        <li  class="flex flex-wrap gap-4 text-gray-800 "
           v-for="sub in subcategoryDropdown.filter(sub => sub.category_id === selectedCategory)" 
           :key="sub.slug"
         >
           <NuxtLink
             :to="`/services/${sub.slug}`"
-            class="subcategory-item"
+            class="subcategory-item1 flex flex-wrap items-center justify-center"
           >
             {{ sub.name }}
           </NuxtLink>

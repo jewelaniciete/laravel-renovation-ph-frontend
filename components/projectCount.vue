@@ -2,8 +2,26 @@
 
 interface Proj {
   id: number;
-
+  professional_project_id: number;
+  professional_project: ProfessionalProject;
 }
+
+
+interface ProfessionalProject {
+  id: number;
+  professional_id: number;
+  barangay_id: null | number;
+  slug: string;
+  name: string;
+  cost: string;
+  start_date: string;
+  end_date: string;
+  privacy_settings: null | string;
+  post_type: null | string;
+  created_at: string;
+  updated_at: string;
+}
+
 
 const projInfo = ref<Proj[]>([]);
 
@@ -34,14 +52,27 @@ async function fetchProjinfo() {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
+      'Authorization': `Bearer ${accessToken}`,
     },
   });
 
   if (response.ok) {
     const data = await response.json();
-    projInfo.value = data.data;
-    console.log(projInfo.value);
+    console.log('Response data:', data);
+
+    const uniqueProjects: { [key: number]: Proj } = {};
+
+    data.data.forEach((project: Proj) => {
+      if (!uniqueProjects[project.professional_project_id]) {
+        uniqueProjects[project.professional_project_id] = { ...project };
+      }
+    });
+
+    projInfo.value = Object.values(uniqueProjects).map(proj => ({
+      ...proj,
+      
+    }));
+    console.log('Filtered Projects:', projInfo.value);
   } else {
     console.error(`Failed to fetch Project data:`, response.statusText);
   }

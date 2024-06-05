@@ -6,7 +6,7 @@
       </div>
       <ul class="subcategory-list" aria-labelledby="pages">
         <li v-for="sub in subcategoryDropdown.filter(sub => sub.category_id === category.id)" :key="sub.category_id">
-          <NuxtLink :to="`/categories/${sub.slug}`" class="subcategory-item">
+          <NuxtLink :to="`/gallery/${sub.slug}`" class="subcategory-item">
             {{ sub.name }}
           </NuxtLink>
         </li>

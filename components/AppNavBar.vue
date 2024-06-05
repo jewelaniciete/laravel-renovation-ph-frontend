@@ -450,9 +450,9 @@ async function logout() {
                     <ul class="flex flex-col items-start mt-5 mb-10 font-medium text-black dark:text-white lg:mt-0 lg:mb-0 lg:items-center lg:flex-row"
                         id="navigation-menu">
                         <li class="relative dropdown lg:mt-0">
-                            <NuxtLink to="/categories">
+                            <NuxtLink to="/gallery">
                                 <button class="py-5 text-black lg:px-4 dropdown-toggle dark:text-gray-50 lg:h-[70px]"
-                                    id="category" data-bs-toggle="dropdown">
+                                    id="gallery" data-bs-toggle="dropdown">
                                     Explore Spaces <i class='bx bxs-chevron-down ltr:ml-1 rtl:mr-1'></i>
                                 </button>
                             </NuxtLink>

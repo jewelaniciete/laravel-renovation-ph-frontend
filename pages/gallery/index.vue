@@ -55,14 +55,8 @@ onMounted(async () => {
   }
 });
 
-
-// const randomColSpan = () => {
-//   const randomSpan = Math.floor(Math.random() * 4) + 3; // Generate a random number between 4 and 6
-//   return `col-span-12 md:col-span-6 lg:col-span-${randomSpan}`;
-// };
-
 const randomColSpan = () => {
-  let randomSpan = Math.floor(Math.random() * 3) + 4
+  let randomSpan = Math.floor(Math.random() * 2) + 3
   if(randomSpan + spanCounter.value > 12) 
   {
     randomSpan = 12 - spanCounter.value
@@ -71,13 +65,12 @@ const randomColSpan = () => {
   else 
   {
     spanCounter.value += randomSpan
-    if(12 - spanCounter.value < 3) {
+    if(12 - spanCounter.value < 2) {
       randomSpan = randomSpan + (12 - spanCounter.value)
       spanCounter.value = 0
     }
   }
     
-  // const randomSpan = ; // Generate a random number between 4 and 6
   return `col-span-6  sm:col-span-12 md:col-span-6 lg:col-span-${randomSpan}`;
 };
 
@@ -100,51 +93,18 @@ onMounted(() => {
 
 </script>
 
-<!-- <template>
-  <div class="main-content bg-gray-400">
-    <div class="page-content">
-      <section class="relative py-28">
-        <div class="container-gallery mx-auto">
-    <div v-if="error" class="error">{{ error }}</div>
-    <div v-else-if="loading" class="loading">Loading...</div>
-    <div v-else>
-      <div class="p-2 space-x-6 flex">
-        <div v-for="project in projects" :key="project.id" class="project relative space-x-6">
-          <NuxtLink :to="`/galleryView/${project.id}`" class="project-link">
-          <div>
-            <div v-if="project.media.length > 0" class="media relative">
-              <img :src="project.media[0].profile_routes[0]" alt="Project Media" class="imgCrd p-1" />
-              <div class="absolute inset-0 transition-all duration-500 rounded-md bg-black opacity-0 group-hover:opacity-40"></div>
-              <div class="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                <h2 class="text-2xl text-white">{{ project.name }}</h2>
-              </div>
-            </div>
-          </div>
-        </NuxtLink>
-        <NuxtLink :to="`/professional-profile-view/${project.professional.user_name}`">
-          <p class="text-black ml-2">{{ project.professional.user_name }}</p>
-        </NuxtLink>
-        </div>
-      </div>
-    </div>
-        </div>
-      </section>
-    </div>
-  </div>
-</template> -->
-
 <template>
   <div class="main-content bg-gray-400">
     <div class="page-content">
       <section class="relative py-28">
-    <div class="container mx-auto">
+    <div class="container-gallery">
       <div class="grid grid-cols-12 gap-y-4 md:gap-y-8 gap-3 p-2 md:p-4 md:gap-8">
         <div v-for="project in projects" :key="project.id" :class="randomColSpan()" class="relative overflow-hidden rounded-md group/modern">
           <NuxtLink :to="`/galleryView/${project.id}`">
             <div v-if="project.media.length > 0" class="media relative ">
-              <img :src="project.media[0].profile_routes[0]" alt="Project Media"  class=" h-[200px] md:imgCard-modern transition-all duration-500 ease-in-out scale-110 rounded-md group-hover/modern:-translate-x-2 group-hover/modern:transition-all" />
-              <div class="absolute inset-0 transition-all duration-500 rounded-md bg-black opacity-0 group-hover:opacity-40  cursor-zoom-in"></div>
-              <div class="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-all duration-500  cursor-zoom-in">
+              <img :src="project.media[0].profile_routes[0]" alt="Project Media"  class=" transition-all duration-500 ease-in-out scale-110 rounded-md group-hover/modern:-translate-x-2 group-hover/modern:transition-all" />
+              <div class="absolute inset-0 transition-all duration-500 rounded-md bg-black opacity-0 group-hover:opacity-40 "></div>
+              <div class="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-all duration-500">
               </div>
               </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50"></div>
@@ -195,5 +155,10 @@ onMounted(() => {
 
 .project {
   margin-bottom: 2em;
+}
+img{
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
 }
 </style>
