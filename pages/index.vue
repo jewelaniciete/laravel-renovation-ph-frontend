@@ -45,25 +45,41 @@ const categories = [
 ]
 
 const cardData = [
-    { id: '1', title: 'label 1', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '2', title: 'label 2', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '3', title: 'label 3', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '4', title: 'label 4', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '5', title: 'label 5', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '6', title: 'label 6', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '7', title: 'label 7', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '8', title: 'label 8', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '9', title: 'label 9', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '10', title: 'label 10', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '11', title: 'label 11', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '12', title: 'label 12', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '13', title: 'label 13', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '14', title: 'label 14', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '15', title: 'label 15', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '16', title: 'label 16', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '17', title: 'label 17', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '18', title: 'label 18', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' },
-    { id: '19', title: 'label 19', image: 'https://cdnb.artstation.com/p/assets/images/images/030/362/979/large/dawid-znaj-2020-09-17-19-44-04-window.jpg?1600365543' }
+    { id: '1', title: 'Kitchen', image: 'https://cdna.artstation.com/p/assets/images/images/007/611/910/large/tomasz-muszynski-screenshot00000.jpg?1507316102' },
+    { id: '2', title: 'Dining Room', image: 'https://cdnb.artstation.com/p/assets/images/images/009/048/419/large/tomasz-muszynski-screenshot00022.jpg?1516826498' },
+    { id: '3', title: 'Pantry', image: 'https://cdna.artstation.com/p/assets/images/images/037/473/698/large/yuwan-chamika-01.jpg?1620472928'},
+    { id: '4', title: 'Living Room', image: 'https://cdna.artstation.com/p/assets/images/images/055/664/302/large/elliot-hoey-001.jpg?1667471421' },
+    { id: '5', title: 'Bath Room', image: 'https://cdnb.artstation.com/p/assets/images/images/007/912/205/large/tomasz-muszynski-lazienkagorna-v1-2500px-01.jpg?1509314073' },
+    { id: '6', title: 'Bedroom', image: 'https://cdnb.artstation.com/p/assets/images/images/022/649/549/large/pawel-pecherzewski-bedroom-final-post.jpg?1576186743' },
+    { id: '7', title: 'Pool', image: 'https://cdnb.artstation.com/p/assets/images/images/058/474/251/large/maria-clara-freire-ramos-whatsapp-image-2023-01-14-at-22-30-25.jpg?1674231652' },
+    { id: '8', title: 'Driveway', image: 'https://cdnb.artstation.com/p/assets/images/images/023/270/309/large/pawel-pecherzewski-house-final-post.jpg?1578657125' },
+    { id: '9', title: 'Poolhouse', image: 'https://cdnb.artstation.com/p/assets/images/images/027/975/987/large/nika-pavliashvili-final.jpg?1593116224' },
+    { id: '10', title: 'Game Room', image: 'https://cdnb.artstation.com/p/assets/images/images/008/220/149/large/daniel-eugenio-acosta-avila-game-room-2-jpeg.jpg?1511278423' },
+    { id: '11', title: 'Backyard', image: 'https://cdnb.artstation.com/p/assets/images/images/000/225/155/large/mark-van-haitsma-backyard-mall-final.jpg?1411926929' },
+    { id: '12', title: 'Library', image: 'https://cdnb.artstation.com/p/assets/images/images/043/396/571/large/jordan-jenart-bibliotheque-lounge-comp.jpg?1637152320' },
+    { id: '13', title: 'Storage & Closet', image: 'https://cdnb.artstation.com/p/assets/images/images/007/995/419/large/giovanni-paladines-walk-in-closet.jpg?1509802784' },
+];
+
+const proData = [
+    { id: '1', title: 'General Contractor', image: 'https://cdnb.artstation.com/p/assets/images/images/056/453/653/large/jaakko-saari-render01.jpg?1669278226' },
+    { id: '2', title: 'Carpenters', image: 'https://cdnb.artstation.com/p/assets/images/images/004/812/663/large/tyler-lynch-wideshotcc2.jpg?1486464209' },
+    { id: '3', title: 'Painters', image: 'https://cdnb.artstation.com/p/assets/images/images/068/937/895/large/jeremy-vergne-render-oneday-6-traite.jpg?1698956408'},
+    { id: '4', title: 'Plumbers', image: 'https://cdna.artstation.com/p/assets/images/images/028/602/996/large/michael-banks-banks-michael-kitchen-props7.jpg?1595270813' },
+    { id: '5', title: 'Electrician', image: 'https://cdnb.artstation.com/p/assets/images/images/010/276/875/large/karl-martin-raastas-kortermaja-0303.jpg?1523551775' },
+    { id: '6', title: 'Window Repair', image: 'https://cdnb.artstation.com/p/assets/images/images/055/691/821/large/lux-studio-r-edit1.jpg?1667523332' },
+    { id: '7', title: 'Architects', image: 'https://cdnb.artstation.com/p/assets/images/images/044/906/947/large/encho-enchev-1.jpg?1641457136' },
+    { id: '8', title: 'Flooring Contractors', image: 'https://cdnb.artstation.com/p/assets/images/images/010/212/533/large/katy-dobis-cp-kdobis-office2-04.jpg?1523206823' },
+];
+
+const styleData = [
+    { id: '1', title: 'Asian Style', image: 'https://cdna.artstation.com/p/assets/images/images/037/935/358/large/amir-fiala-1.jpg?1621712044' },
+    { id: '2', title: 'Contemporary Style', image: 'https://cdna.artstation.com/p/assets/images/images/025/292/338/large/erdem-demir-1.jpg?1585318650' },
+    { id: '3', title: 'Industrial Style', image: 'https://cdnb.artstation.com/p/assets/images/images/040/584/451/large/victoria-day2.jpg?1629292720'},
+    { id: '4', title: 'Modern Style', image: 'https://cdnb.artstation.com/p/assets/images/images/048/225/933/large/nikola-simic-kuca1.jpg?1649510533' },
+    { id: '5', title: 'South western Style', image: 'https://cdnb.artstation.com/p/assets/images/images/065/791/657/large/3decraft-projekt-dobrze-ulozony-04.jpg?1691233132' },
+    { id: '6', title: 'Traditional Style', image: 'https://cdnb.artstation.com/p/assets/images/images/014/082/123/large/theo-soumaille-modern-house-render.jpg?1542379116' },
+    { id: '7', title: 'Transitional Style', image: 'https://cdna.artstation.com/p/assets/images/images/056/417/098/large/henning-birkeland-aihus-unrealrender.jpg?1669194697' },
+    { id: '8', title: 'Tropical Style', image: 'https://cdnb.artstation.com/p/assets/images/images/007/329/361/large/red-cloud-modernhouserendernode.jpg?1505368681' },
 ];
 
 const prev = () => {
@@ -201,12 +217,12 @@ onMounted(() => {
                             :modules="modules" class="mySwiper"
                             >
                         <swiper-slide v-for="(card, index) in cardData" :key="index" class="p-4">
-                            <div class="overflow-hidden bg-white rounded-lg shadow-lg lg:max-w-sm ring-4 ring-red-500 ring-opacity-40">
+                            <div class="overflow-hidden bg-white rounded-lg shadow-lg lg:max-w-sm ring-4  ring-red-500 ring-opacity-40">
                                 <div class="relative">
-                                    <img class="w-full" src="assets/images/renovation/design and planning.png" alt="Product Image">
+                                    <img class="w-full " :src="card.image" alt="Product Image">
                                 </div>
                                 <div class="p-4 text-center">
-                                    <h3 class="mb-2 text-lg font-medium text-gray-900">{{card.title}}</h3>
+                                    <h3 class="mb-2 text-sm font-medium text-gray-900">{{card.title}}</h3>
                                 </div>
                             </div>
                         </swiper-slide>
@@ -229,13 +245,13 @@ onMounted(() => {
                             :scrollbar="false" :navigation="true" :pagination="{clickable: true,}"
                             :modules="modules" class="mySwiper"
                             >
-                        <swiper-slide v-for="(card, index) in cardData" :key="index" class="p-4">
+                        <swiper-slide v-for="(prof, index) in proData" :key="index" class="p-4">
                             <div class="max-w-sm overflow-hidden bg-white rounded-lg shadow-lg ring-4 ring-red-500 ring-opacity-40">
                                 <div class="relative">
-                                    <img class="w-full" src="assets/images/renovation/professional.png" alt="Product Image">
+                                    <img class="w-full" :src="prof.image" alt="Product Image">
                                 </div>
                                 <div class="p-4 text-center">
-                                    <h3 class="mb-2 text-lg font-medium text-gray-900">{{card.title}}</h3>
+                                    <h3 class="mb-2 text-sm font-medium text-gray-900">{{prof.title}}</h3>
                                 </div>
                             </div>
                         </swiper-slide>
@@ -258,13 +274,13 @@ onMounted(() => {
                             :scrollbar="false" :navigation="true" :pagination="{clickable: true,}"
                             :modules="modules" class="mySwiper"
                             >
-                        <swiper-slide v-for="(card, index) in cardData" :key="index" class="p-4">
+                        <swiper-slide v-for="(style, index) in styleData" :key="index" class="p-4">
                             <div class="max-w-sm overflow-hidden bg-white rounded-lg shadow-lg ring-4 ring-red-500 ring-opacity-40">
                                 <div class="relative">
-                                    <img class="w-full" src="assets/images/renovation/project style.jpg" alt="Product Image">
+                                    <img class="w-full" :src="style.image" alt="Product Image">
                                 </div>
                                 <div class="p-4 text-center">
-                                    <h3 class="mb-2 text-lg font-medium text-gray-900">{{card.title}}</h3>
+                                    <h3 class="mb-2 text-sm font-medium text-gray-900">{{style.title}}</h3>
                                 </div>
                             </div>
                         </swiper-slide>
@@ -282,10 +298,9 @@ onMounted(() => {
                               <div class="grid items-center grid-cols-12 gap-5">
                                   <div class="col-span-12 lg:col-span-8 lg:col-start-3">
                                       <div class="text-center">
-                                          <h2 class="mb-5 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">Browse Our <span class="text-yellow-500 fw-bold">5,000+</span> Latest
-                                              Jobs</h2>
-                                          <p class="text-gray-500 dark:text-gray-300">Post a job to tell us about your project. We'll quickly match you with
-                                              the right freelancers.</p>
+                                          <h2 class="mb-5 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">Browse Our <span class="text-yellow-500 fw-bold">5,000+</span>
+                                              Professionals</h2>
+                                          <p class="text-gray-500 dark:text-gray-300">Look for the best of the best experts that fits in your house renovation</p>
                                           <div class="pt-2 mt-5">
                                               <a href="javascript:void(0)" class="text-white border-transparent group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 btn hover:-translate-y-2">Started Now <i class="align-middle uil uil-rocket ms-1"></i></a>
                                           </div>
