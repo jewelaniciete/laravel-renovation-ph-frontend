@@ -44,6 +44,7 @@ interface ProjectData {
 }
 
 const projects = ref<ProjectData[]>([]);
+const projectshow = ref<ProjectData[]>([]);
 const loading = ref(true);
 const error = ref<string | null>(null);
 const route = useRoute();
@@ -52,6 +53,33 @@ const param = route.params.param as string;
 
 onMounted(() => {
   fetchGallery(param);
+});
+
+
+onMounted(async () => {
+  try {
+    const response = await fetch('http://localhost:8000/api/gallery/gallery-show');
+    if (!response.ok) {
+      const data = await response.json();
+      console.log('Response data:', data);
+
+      projectshow.value = data.data;
+      console.log(projects.value);
+      const filteredProjects = data.data.map((project: ProjectData) => {
+        const filteredMedia = project.media.filter((media) => media.file.startsWith('0'));
+        return { ...project, media: filteredMedia };
+      });
+
+      projectshow.value = filteredProjects;
+      console.log('Filtered Projects:', projects.value);
+    }
+    const data = await response.json();
+    projectshow.value = data.data; // Adjust this based on your API response structure
+  } catch (err) {
+    error.value = 'Failed to load projects.';
+  } finally {
+    loading.value = false;
+  }
 });
 
 const fetchGallery = async (param: string) => {
@@ -80,6 +108,8 @@ const fetchGallery = async (param: string) => {
     loading.value = false;
   }
 };
+
+
 </script>
 
 <template>
@@ -94,7 +124,8 @@ const fetchGallery = async (param: string) => {
               <div class="p-2 space-x-6">
                 <div class="project flex flex-col gap-5 lg:flex-row">
                   <div class="image-container">
-                    <img src="assets/images/renovation/dafault-img.jpg" alt="Project Media" class="bg-gray-500 fakeloading left" />
+                    <img src="assets/images/renovation/dafault-img.jpg" alt="Project Media"
+                      class="bg-gray-500 fakeloading left" />
                   </div>
                   <div class="p-2 bg-white right">
                     <div class="text-black text-lg font-semibold pb-1">
@@ -107,7 +138,8 @@ const fetchGallery = async (param: string) => {
                       <p>Loading...</p>
                     </div>
                     <div>
-                      <div class="animate-spin inline-block w-8 h-8 border-[3px] border-l-transparent border-green-500 rounded-full">
+                      <div
+                        class="animate-spin inline-block w-8 h-8 border-[3px] border-l-transparent border-green-500 rounded-full">
                         <span class="hidden">Loading...</span>
                       </div>
                     </div>
@@ -120,7 +152,7 @@ const fetchGallery = async (param: string) => {
                 <div v-for="project in projects" :key="project.id" class="project flex flex-col gap-5 lg:flex-row">
                   <div v-if="project.media.length > 0" class="image-container">
                     <div v-for="media in project.media" :key="media.id">
-                      <img :src="media.profile_routes[0]" alt="Project Media"  />
+                      <img :src="media.profile_routes[0]" alt="Project Media" />
                     </div>
                   </div>
                   <div class="p-2 bg-white right">
@@ -130,7 +162,8 @@ const fetchGallery = async (param: string) => {
                       </div>
                     </NuxtLink>
                     <div class="text-black text-sm pb-1">
-                      {{ project.professional_project.professional.first_name }} {{ project.professional_project.professional.last_name }}
+                      {{ project.professional_project.professional.first_name }} {{
+                        project.professional_project.professional.last_name }}
                     </div>
                     <NuxtLink :to="`/projectView/${project.professional_project.id}`" class="project-link">
                       <div class="text-black text-xl font-bold pb-2 hover:text-green-500">
@@ -150,13 +183,14 @@ const fetchGallery = async (param: string) => {
             </div>
           </div>
         </div>
+        <img-crsl />
       </section>
+     
     </div>
   </div>
 </template>
 
 <style scoped>
-
 .fakeloading {
   width: auto;
   height: 650px;
@@ -165,21 +199,21 @@ const fetchGallery = async (param: string) => {
 
 .image-container {
   width: 100%;
-  height: auto; 
-  overflow: hidden; 
-  background-color: lightgray;  
+  height: auto;
+  overflow: hidden;
+  background-color: lightgray;
 
   padding-left: 16rem;
   padding-right: 16rem;
 }
 
 .image-container img {
-  width: 100%; 
-  height: auto; 
-  max-height: 100%; 
-  object-fit: contain !important; 
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain !important;
   object-position: center !important;
- 
+
 }
 
 .right {
@@ -187,6 +221,7 @@ const fetchGallery = async (param: string) => {
   display: relative;
   padding: 4px;
 }
+
+
 </style>
 
-<!--1506.390x632.969 container size-->
