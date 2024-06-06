@@ -120,7 +120,7 @@ onMounted(async () => {
             </div>
             <div v-else>
               <swiper :slidesPerView="5" :centeredSlides="false" :slidesPerGroupSkip="1" :grabCursor="true" :keyboard="{enabled: true,}"
-                            :breakpoints="{'769': {slidesPerView: 5, slidesPerGroup: 5,}, '300': {slidesPerView: 1, slidesPerGroup: 1,},}"
+                            :breakpoints="{'769': {slidesPerView: 5, slidesPerGroup: 1,}, '300': {slidesPerView: 1, slidesPerGroup: 1,},}"
                             :scrollbar="false" :navigation="true" :pagination="{clickable: true,}"
                             :modules="modules" class="mySwiper"
                             >

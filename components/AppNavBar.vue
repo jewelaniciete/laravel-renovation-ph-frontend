@@ -147,7 +147,8 @@ async function logout() {
                             <li
                                 class="transition-all duration-200 ease-in hover:text-green-500 dark:text-gray-50 dark:hover:text-green-500">
                                 <a href="javascript:void(0)" class="social-link"><i
-                                        class="uil uil-facebook-messenger-alt"></i></a></li>
+                                        class="uil uil-facebook-messenger-alt"></i></a>
+                            </li>
                             <li
                                 class="transition-all duration-200 ease-in hover:text-green-500 dark:text-gray-50 dark:hover:text-green-500">
                                 <a href="javascript:void(0)" class="social-link"><i class="uil uil-instagram"></i></a>
@@ -265,6 +266,16 @@ async function logout() {
                     <div v-else-if="showNavbarAccount" class="flex flex-row">
                         <div>
                             <div class="relative dropdown">
+                                <NuxtLink to="/projectForm" class="flex items-center py-3 rounded border-dashed mt-4 border lg:px-4 dropdown-toggle"
+                                    id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="true">
+                                    <img src="assets/images/renovation/add.svg" alt="" class="w-6 h-6">
+                                </NuxtLink>
+                                </div>
+                        </div>
+
+                        <div>
+                            <div class="relative dropdown">
                                 <div class="relative">
                                     <button type="button"
                                         class="btn border-0 mt-1 h-[70px] dropdown-toggle px-4 text-gray-500 dark:text-gray-300"
@@ -303,7 +314,8 @@ async function logout() {
                                                             <div class="text-gray-600 text-13 dark:text-gray-300">
                                                                 <p class="mb-0"><i
                                                                         class="mdi mdi-clock-outline dark:text-gray-300"></i>
-                                                                    <span>3 hour ago</span></p>
+                                                                    <span>3 hour ago</span>
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -322,7 +334,8 @@ async function logout() {
                                                             <div class="text-gray-600 text-13 dark:text-gray-300">
                                                                 <p class="mb-0"><i
                                                                         class="mdi mdi-clock-outline dark:text-gray-300"></i>
-                                                                    <span>1 hour ago</span></p>
+                                                                    <span>1 hour ago</span>
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -341,7 +354,8 @@ async function logout() {
                                                             <div class="text-gray-600 text-13 dark:text-gray-300">
                                                                 <p class="mb-0"><i
                                                                         class="mdi mdi-clock-outline dark:text-gray-300"></i>
-                                                                    <span>45 min ago</span></p>
+                                                                    <span>45 min ago</span>
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -360,7 +374,8 @@ async function logout() {
                                                             <div class="text-gray-600 text-13 dark:text-gray-300">
                                                                 <p class="mb-0"><i
                                                                         class="mdi mdi-clock-outline dark:text-gray-300"></i>
-                                                                    <span>15 min ago</span></p>
+                                                                    <span>15 min ago</span>
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -379,7 +394,8 @@ async function logout() {
                                                             <div class="text-gray-600 text-13 dark:text-gray-300">
                                                                 <p class="mb-0"><i
                                                                         class="mdi mdi-clock-outline dark:text-gray-300"></i>
-                                                                    <span>15 min ago</span></p>
+                                                                    <span>15 min ago</span>
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -404,8 +420,10 @@ async function logout() {
                                 <button type="button" class="flex items-center py-5 lg:px-4 dropdown-toggle"
                                     id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="true">
-                                    <img class="rounded-full size-1 lg:size-small ltr:xl:mr-2 rtl:xl:ml-2" :src="profile.profile_route" alt="Header Avatar">
-                                    <span class="hidden font-medium text-gray-500 xl:block dark:text-gray-50">{{ client.user_name }}</span>
+                                    <img class="rounded-full size-1 lg:size-small ltr:xl:mr-2 rtl:xl:ml-2"
+                                        :src="profile.profile_route" alt="Header Avatar">
+                                    <span class="hidden font-medium text-gray-500 xl:block dark:text-gray-50">{{
+                                        client.user_name }}</span>
                                 </button>
                                 <ul class="absolute top-auto z-50 hidden w-48 p-3 list-none bg-white border rounded shadow-lg dropdown-menu border-gray-500/20 xl:ltr:-left-3 ltr:-left-32 rtl:-right-3 dark:bg-neutral-800"
                                     id="profile/log" aria-labelledby="navNotifications">
@@ -437,11 +455,12 @@ async function logout() {
 
                     <div v-else class="flex items-center px-6">
                         <button type="button" class="flex items-center px-4 py-5 dropdown-toggle"
-                                    id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="true">
-                        <span class="bg-gray-500 rounded-full size-1 lg:size-small ltr:xl:mr-2 rtl:xl:ml-2" alt="Header Avatar"></span>
-                        <span class="hidden font-medium text-gray-200 xl:block dark:text-gray-50">Loading....</span>
-                    </button>
+                            id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="true">
+                            <span class="bg-gray-500 rounded-full size-1 lg:size-small ltr:xl:mr-2 rtl:xl:ml-2"
+                                alt="Header Avatar"></span>
+                            <span class="hidden font-medium text-gray-200 xl:block dark:text-gray-50">Loading....</span>
+                        </button>
                     </div>
                 </div>
 

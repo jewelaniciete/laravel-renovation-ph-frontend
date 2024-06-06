@@ -70,6 +70,7 @@ onMounted(async () => {
           <p class="text-black ml-2">{{ project.professional.user_name }}</p>
         </div>
       </div>
+      
     </div>
   </div>
 </template>

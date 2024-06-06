@@ -140,6 +140,7 @@ async function fetchProjinfo() {
         <div class="container mx-auto">
           <div class="grid grid-cols-2">
             <div class="w-70 mx-auto bg-white p-6 text-gray-400 space-y-3">
+              <div><button @click="$router.back()" class="text-gray-400 font-semibold">Back</button></div>
               <p class="text-4xl font-semibold">Project Details</p>
               <div v-if="error">
                 <p>Error: {{ error.message }}</p>

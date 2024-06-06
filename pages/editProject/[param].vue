@@ -2,27 +2,33 @@
 interface ProjectMedia {
   id: number;
     file: string;
-
   profile_routes: string;
+  mediable_id: number;
+
 }
 
 interface ProjectData {
   name: string;
+  id: number;
   start_date: string;
   end_date: string;
   slug: string;
-  cost: number;
-  project_media: ProjectMedia[];
+  cost: string;
+  media: ProjectMedia[];
 }
 
-interface Project {
-  data: ProjectData;
-}
 
-const project = ref<Project | null>(null);
+const project = ref<ProjectData | null>(null);
 const error = ref<Error | null>(null);
 const route = useRoute();
+const router = useRouter();
 const param = route.params.param as string;
+const formData = ref({
+  name: '',
+  start_date: '',
+  end_date: '',
+  cost: '',
+})
 
 onMounted(() => {
   fetchProject(param);
@@ -38,14 +44,6 @@ function getCookie(name: string): string | null {
   return null;
 }
 
-const adjustMediaUrls = (mediaArray: ProjectMedia[]) => {
-  return mediaArray.map(media => {
-    return {
-      ...media,
-      profile_routes: `http://localhost:8000/storage/uploads/projects/${media.profile_routes}`
-    };
-  });
-};
 
 const fetchProject = async (param: string) => {
   const accessToken = getCookie('access_token');
@@ -70,16 +68,45 @@ const fetchProject = async (param: string) => {
     }
 
     const data = await response.json();
-    data.data.project_media = adjustMediaUrls(data.data.project_media);
-    project.value = data as Project;
+    project.value = data.data as ProjectData;
   } catch (err) {
     error.value = err as Error;
   }
 }
 
+async function updateProject() {
+  const accessToken = getCookie('access_token');
+  if (!accessToken) {
+    console.error('No access token found');
+    return;
+  }
 
+  try {
+    const route = useRoute();
+    const param = route.params.param as string;
+    const response = await fetch(`http://localhost:8000/api/professionals/project/${param}/update`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(formData.value)
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    project.value = data.data;
+
+    setTimeout(() => {
+      window.history.go(-1);
+    }, 1000);
+  } catch (error) {
+    console.error('Error updating project media:', error);
+  }
+}
 </script>
-
 
 <template>
   <div class="main-content bg-gray-400">
@@ -88,26 +115,54 @@ const fetchProject = async (param: string) => {
         <div class="container mx-auto">
           <div class="grid grid-cols-2">
             <div class="w-70 mx-auto bg-white p-6 text-gray-400 space-y-3">
-              <p class="text-4xl font-semibold">Project Details</p>
+
               <div v-if="error">
                 <p>Error: {{ error.message }}</p>
               </div>
-              <div v-else-if="project" class="space-y-3 text-black">
-                <p class="text-xl">{{ project.data.name }}</p>
-                <p class="text-base">Project Duration: {{ project.data.start_date }} - {{ project.data.end_date }}</p>
-                <p class="text-base">Project Cost: {{ project.data.cost }}</p>
-                <div v-if="project.data.project_media" class="space-y-3">
-                  <NuxtLink :to="`/editProject/${project.data.slug}`"  class="bg-gray-btn border p-2 rounded-md hover:bg-gray-500 hover:text-white">Edit Project</NuxtLink>
-                  <h3>Project Media</h3>
-                  <div v-for="media in project.data.project_media" :key="media.id">
-                    <img :src="media.profile_routes" class="pv p-1" />
+            
+              <div v-else-if="project" class="space-y-3">
+                <form @submit.prevent="updateProject">
+                  <div class="flex flex-col">
+                    <label class="pr-3 text-black text-lg font-semibold">Project Title:</label>
+                    <input v-model="formData.name" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" value="project.name" :placeholder="project.name">
+                    
+                    <label class="pr-3 text-black text-lg font-semibold">Project Duration</label>
+                    <div class="w-1/2 space-x-2">
+                      <label class="pr-3 text-black text-lg font-semibold">Start Date:</label>
+                    <input v-model="formData.start_date" class="w-1/2 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" :placeholder="project.start_date" type="date">
+                   
+                    <label class="pr-3 text-black text-lg font-semibold" >End Date:</label>
+                    <input v-model="formData.end_date" class="w-1/2 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" :placeholder="project.end_date" type="date">
                   </div>
+                    
+                    <label class="pr-3 text-black text-lg font-semibold" >Project Cost:</label>
+                    <input v-model="formData.cost" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" :placeholder="project.cost" type="number">   
+                 
+                  </div>
+                  <div v-if="project.media" class="space-y-3 mt-2">
+                    <h3>Project Media <span class="text-xs">(Click photo to edit)</span></h3>
+                    
+                    <div class="flex">
+                      <div v-for="media in project.media" :key="media.id">
+                        <NuxtLink :to="`/mediaUpdate/${media.id}`">
+                          <img :src="media.profile_routes" class="pv p-1" />
+                        </NuxtLink>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="space-x-4">
+                  <button type="submit" class="bg-gray-400 px-3 py-2 rounded-md text-black font-semibold">Save</button>
                 </div>
+                </form>
+                <button @click="$router.back()" class="text-gray-400 font-semibold">Back</button>
+
+              
+
               </div>
+              
               <div v-else>
                 <p>Loading...</p>
               </div>
-            
             </div>
           </div>
         </div>
@@ -115,10 +170,3 @@ const fetchProject = async (param: string) => {
     </div>
   </div>
 </template>
-
-
-
-
-<style>
-
-</style>

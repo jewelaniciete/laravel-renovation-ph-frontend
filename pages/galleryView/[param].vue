@@ -183,7 +183,7 @@ const fetchGallery = async (param: string) => {
             </div>
           </div>
         </div>
-        <img-crsl />
+        <!-- <img-crsl /> -->
       </section>
      
     </div>

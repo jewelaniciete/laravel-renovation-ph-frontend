@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import moment from 'moment';
+
 interface Media {
   id: number;
   file: string;
@@ -18,36 +19,35 @@ interface Project {
   name: string;
   description: string;
   media: Media[];
+  privacy_settings: number;
   professional: Professional;
 }
 
 const PAGE_SIZE = 9;
 
 let currentPage = ref(1);
-const spanCounter = ref(0)
+const spanCounter = ref(0);
 const projects = ref<Project[]>([]);
+const displayedProjects = ref<Project[]>([]);
 const loading = ref(true);
 const error = ref<string | null>(null);
 
 onMounted(async () => {
   try {
     const response = await fetch('http://localhost:8000/api/gallery/gallery-show');
-    if (!response.ok) {
-      const data = await response.json();
-      console.log('Response data:', data);
+    if (!response.ok) throw new Error('Failed to fetch');
+    const data = await response.json();
+    projects.value = data.data;
 
-      projects.value = data.data;
-      console.log(projects.value);
-      const filteredProjects = data.data.map((project: Project) => {
+    const filteredProjects = projects.value
+      .filter((project: Project) => project.privacy_settings === 0)
+      .map((project: Project) => {
         const filteredMedia = project.media.filter((media) => media.file.startsWith('0'));
         return { ...project, media: filteredMedia };
       });
 
-      projects.value = filteredProjects;
-      console.log('Filtered Projects:', projects.value);
-    }
-    const data = await response.json();
-    projects.value = data.data; // Adjust this based on your API response structure
+    projects.value = filteredProjects;
+    paginateData();
   } catch (err) {
     error.value = 'Failed to load projects.';
   } finally {
@@ -56,40 +56,33 @@ onMounted(async () => {
 });
 
 const randomColSpan = () => {
-  let randomSpan = Math.floor(Math.random() * 2) + 3
-  if(randomSpan + spanCounter.value > 12) 
-  {
-    randomSpan = 12 - spanCounter.value
+  let randomSpan = Math.floor(Math.random() * 2) + 3;
+  if (randomSpan + spanCounter.value > 12) {
+    randomSpan = 12 - spanCounter.value;
     spanCounter.value = 0;
-  }
-  else 
-  {
-    spanCounter.value += randomSpan
-    if(12 - spanCounter.value < 2) {
-      randomSpan = randomSpan + (12 - spanCounter.value)
-      spanCounter.value = 0
+  } else {
+    spanCounter.value += randomSpan;
+    if (12 - spanCounter.value < 2) {
+      randomSpan = randomSpan + (12 - spanCounter.value);
+      spanCounter.value = 0;
     }
   }
-    
-  return `col-span-6  sm:col-span-12 md:col-span-6 lg:col-span-${randomSpan}`;
+  return `col-span-6 sm:col-span-12 md:col-span-6 lg:col-span-${randomSpan}`;
 };
 
-const totalPages = Math.ceil(projects.value.length / PAGE_SIZE);
+const totalPages = ref(0);
 
 const paginateData = () => {
   const startIndex = (currentPage.value - 1) * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
-  projects.value = projects.value.slice(startIndex, endIndex);
+  displayedProjects.value = projects.value.slice(startIndex, endIndex);
+  totalPages.value = Math.ceil(projects.value.length / PAGE_SIZE);
 };
 
-const changePage = (page: number ) => {
+const changePage = (page: number) => {
   currentPage.value = page;
   paginateData();
 };
-
-onMounted(() => {
-  paginateData();
-});
 
 </script>
 
@@ -136,13 +129,12 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
+<style scoped>
+
 .media:hover .opacity-0 {
   opacity: 1;
 }
-</style>
 
-<style scoped>
 .loading {
   font-size: 1.5em;
   text-align: center;

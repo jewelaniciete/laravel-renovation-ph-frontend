@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css";
+import Privacy from './template/company/privacy.vue';
 
 definePageMeta({
   layout: 'template-default'
@@ -15,6 +16,7 @@ const formData = ref({
   cost: '',
   start_date: '',
   end_date: '',
+  privacy_settings: '',
 });
 
 function onChangeFile(event) {
@@ -174,6 +176,7 @@ async function uploadProject() {
                     </div>
                   </label>
                 </div>
+                
                 <div>
                   <button type="submit" class="float-right p-3 px-4 bg-gray-500 rounded-md">
                     Post
