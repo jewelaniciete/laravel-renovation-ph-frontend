@@ -13,6 +13,7 @@ interface ProjectData {
   start_date: string;
   end_date: string;
   slug: string;
+  privacy_settings: string;
   cost: string;
   media: ProjectMedia[];
 }
@@ -28,6 +29,7 @@ const formData = ref({
   start_date: '',
   end_date: '',
   cost: '',
+  privacy_settings: '',
 })
 
 onMounted(() => {
@@ -69,6 +71,7 @@ const fetchProject = async (param: string) => {
 
     const data = await response.json();
     project.value = data.data as ProjectData;
+    formData.value = {...formData.value, ...project.value};
   } catch (err) {
     error.value = err as Error;
   }
@@ -98,6 +101,8 @@ async function updateProject() {
     }
     const data = await response.json();
     project.value = data.data;
+    formData.value = {...formData.value, ...project.value};
+
 
     setTimeout(() => {
       window.history.go(-1);
@@ -113,18 +118,18 @@ async function updateProject() {
     <div class="page-content">
       <section class="relative py-20">
         <div class="container mx-auto">
-          <div class="grid grid-cols-2">
-            <div class="w-70 mx-auto bg-white p-6 text-gray-400 space-y-3">
+          <div class="">
+            <div class="mx-auto bg-white p-6 text-gray-400 space-y-3">
 
               <div v-if="error">
                 <p>Error: {{ error.message }}</p>
               </div>
             
-              <div v-else-if="project" class="space-y-3">
+              <div v-else-if="project" class="p-10 space-y-3">
                 <form @submit.prevent="updateProject">
-                  <div class="flex flex-col">
+                  <div class="flex flex-col ">
                     <label class="pr-3 text-black text-lg font-semibold">Project Title:</label>
-                    <input v-model="formData.name" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" value="project.name" :placeholder="project.name">
+                    <input v-model="formData.name" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md w-70" :placeholder="project.name">
                     
                     <label class="pr-3 text-black text-lg font-semibold">Project Duration</label>
                     <div class="w-1/2 space-x-2">
@@ -134,9 +139,14 @@ async function updateProject() {
                     <label class="pr-3 text-black text-lg font-semibold" >End Date:</label>
                     <input v-model="formData.end_date" class="w-1/2 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" :placeholder="project.end_date" type="date">
                   </div>
-                    
+                   
+                  <div class="flexs space-y-3 space-x-4">
                     <label class="pr-3 text-black text-lg font-semibold" >Project Cost:</label>
-                    <input v-model="formData.cost" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" :placeholder="project.cost" type="number">   
+                    <input v-model="formData.cost" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md w-40" :placeholder="project.cost" type="number">   
+                   
+                    <label class="pr-3 text-black text-lg font-semibold" >Privacy:</label>
+                    <input v-model="formData.privacy_settings" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md w-40" :placeholder="project.privacy_settings" type="number">   
+                  </div>
                  
                   </div>
                   <div v-if="project.media" class="space-y-3 mt-2">

@@ -152,6 +152,7 @@ async function updateMedia() {
     }
     const data = await response.json();
     projects.value = data.data;
+    formData.value = {...formData.value};
 
     setTimeout(() => {
       window.history.go(-1);
@@ -179,7 +180,7 @@ async function updateMedia() {
                   <input v-model="formData.title" :placeholder="project.title" class="ml-4 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" />
 
                   <label class="text-black font-semibold text-2xl">Description:</label>
-                  <input v-model="formData.description" :placeholder="project.description" class="ml-4 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" />
+                  <textarea  v-model="formData.description" :placeholder="project.description" class="ml-4 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" />
 
                   <label class="text-black font-semibold text-2xl">Space ID:</label>
                   <select v-model="formData.space_id" class="ml-4 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md">
