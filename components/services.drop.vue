@@ -21,7 +21,7 @@
           :key="sub.slug"
         >
           <NuxtLink
-            :to="`/services/${sub.slug}`"
+            :to="`/services/${sub.id}`"
             class="subcategory-item1 flex flex-wrap items-center justify-center"
           >
             {{ sub.name }}
@@ -43,6 +43,7 @@ interface Category {
 
 interface Subcategory {
   category_id: number;
+  id: number;
   name: string;
   slug: string;
   // Add other properties if there are any

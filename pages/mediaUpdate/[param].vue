@@ -123,6 +123,7 @@ onMounted(async () => {
     }
     const data = await response.json();
     projects.value = data.data;
+    formData.value = {...formData.value, ...projects.value};
   } catch (error) {
     console.error('Error fetching project media:', error);
   }
@@ -152,7 +153,7 @@ async function updateMedia() {
     }
     const data = await response.json();
     projects.value = data.data;
-    formData.value = {...formData.value};
+    formData.value = {...formData.value, ...projects.value};
 
     setTimeout(() => {
       window.history.go(-1);

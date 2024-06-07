@@ -24,32 +24,32 @@ interface Project {
 }
 
 const PAGE_SIZE = 9;
-
-let currentPage = ref(1);
-// const spanCounter = ref(0)
+const currentPage = ref(1);
 const projects = ref<Project[]>([]);
 const displayedProjects = ref<Project[]>([]);
 const loading = ref(true);
 const error = ref<string | null>(null);
- const route = useRoute();
+const route = useRoute();
 const param = route.params.param as string;
-
 
 onMounted(async () => {
   try {
     const response = await fetch(`http://localhost:8000/api/gallery/projects-space/${param}/show`);
     if (!response.ok) throw new Error('Failed to fetch');
     const data = await response.json();
-    projects.value = data.data;
+    
+    const transformedProjects = data.data.map((item: any) => ({
+      id: item.id,
+      created_at: item.created_at,
+      name: item.professional_project.name,
+      description: item.professional_project.description,
+      media: [item.media],
+      privacy_settings: item.professional_project.privacy_settings,
+      professional: item.professional_project.professional
+    }));
 
-    const filteredProjects = projects.value
-      .filter((project: Project) => project.privacy_settings === 0)
-      .map((project: Project) => {
-        const filteredMedia = project.media.filter((media) => media.file.startsWith('0'));
-        return { ...project, media: filteredMedia };
-      });
+    projects.value = transformedProjects.filter((project: Project) => project.privacy_settings === 0);
 
-    projects.value = filteredProjects;
     paginateData();
   } catch (err) {
     error.value = 'Failed to load projects.';
@@ -62,7 +62,6 @@ const spanCounter = { value: 0 };
 
 const randomColSpan = () => {
   let remainingSpan = 12 - spanCounter.value;
-  
   if (remainingSpan <= 3) {
     let randomSpan = remainingSpan;
     spanCounter.value = 0;
@@ -104,47 +103,48 @@ const changePage = (page: number) => {
   <div class="bg-gray-400 main-content">
     <div class="page-content">
       <section class="relative py-28">
-    <div class="container-gallery">
-      <div class="grid grid-flow-row grid-cols-12 gap-3 p-2 grid-fluid gap-y-4 md:gap-y-8 md:p-4 md:gap-8">
-        <div v-for="project in projects" :key="project.id" :class="randomColSpan()" class="relative overflow-hidden rounded-md group/modern">
-          <NuxtLink :to="`/galleryView/${project.id}`">
-            <div v-if="project.media.length > 0" class="relative media">
-              <img :src="project.media[0].profile_routes[0]" alt="Project Media"  class="transition-all duration-500 ease-in-out scale-110 rounded-md group-hover/modern:-translate-x-2 group-hover/modern:transition-all" />
-              <div class="absolute inset-0 transition-all duration-500 bg-black rounded-md opacity-0 group-hover:opacity-40 "></div>
-              <div class="absolute transition-all duration-500 opacity-0 bottom-2 left-2 group-hover:opacity-100">
-              </div>
+        <div class="container-gallery">
+          <div class="grid grid-flow-row grid-cols-12 gap-3 p-2 grid-fluid gap-y-4 md:gap-y-8 md:p-4 md:gap-8">
+            <div v-for="project in displayedProjects" :key="project.id" :class="randomColSpan()" class="relative overflow-hidden rounded-md group/modern">
+              <NuxtLink :to="`/galleryView/${project.id}`">
+                <div v-if="project.media.length > 0" class="relative media">
+                  <img :src="project.media[0].profile_routes[0]" alt="Project Media" class="transition-all duration-500 ease-in-out scale-110 rounded-md group-hover/modern:-translate-x-2 group-hover/modern:transition-all" />
+                  <div class="absolute inset-0 transition-all duration-500 bg-black rounded-md opacity-0 group-hover:opacity-40 "></div>
+                  <div class="absolute transition-all duration-500 opacity-0 bottom-2 left-2 group-hover:opacity-100">
+                  </div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50"></div>
+                <div class="absolute bottom-3 ltr:left-3 rtl:right-3">
+                  <NuxtLink :to="`/galleryView/${project.id}`"><h5 class="text-sm text-white card-title">{{ project.name }}</h5></NuxtLink>
+                  <p class="mt-1 text-xs text-gray-100">
+                    <NuxtLink :to="`/professional-profile-view/${project.professional.user_name}`" class="font-bold text-white-50">{{ project.professional.user_name }}</NuxtLink> - {{ moment(project.created_at).fromNow() }}
+                  </p>
+                </div>
+              </NuxtLink>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/50"></div>
-            <div class="absolute bottom-3 ltr:left-3 rtl:right-3">
-              <NuxtLink :to="`/galleryView/${project.id}`" ><h5 class="text-sm text-white card-title ">{{ project.name }}</h5></NuxtLink>
-              <p class="mt-1 text-xs text-gray-100 "> <NuxtLink :to="`/professional-profile-view/${project.professional.user_name}`" class="font-bold text-white-50">{{ project.professional.user_name }}</NuxtLink> -  {{ moment(project.created_at).fromNow()}}</p>
-            </div>
-          </NuxtLink>
+          </div>
         </div>
-      </div>
-    </div>
-    <ul class="flex justify-center gap-2 mt-14">
-      <li class="w-12 h-12 text-center border rounded-full cursor-default border-gray-100/50 dark:border-zinc-600 dark:border-gray-100/20" :class="{ 'opacity-50 cursor-not-allowed': currentPage === 1 }" @click="currentPage > 1 && changePage(currentPage - 1)">
-          <a class="cursor-auto" href="javascript:void(0)" tabindex="-1">
+        <ul class="flex justify-center gap-2 mt-14">
+          <li class="w-12 h-12 text-center border rounded-full cursor-default border-gray-100/50 dark:border-zinc-600 dark:border-gray-100/20" :class="{ 'opacity-50 cursor-not-allowed': currentPage === 1 }" @click="currentPage > 1 && changePage(currentPage - 1)">
+            <a class="cursor-auto" href="javascript:void(0)" tabindex="-1">
               <i class="mdi mdi-chevron-double-left text-16 leading-[2.8] dark:text-gray-50"></i>
-          </a>
-      </li>
-      <li v-for="page in totalPages" :key="page" :class="{ 'text-white bg-violet-500': currentPage === page, 'text-gray-900 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:text-gray-50 dark:hover:bg-gray-500/20': currentPage !== page }" class="w-12 h-12 text-center transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 dark:border-zinc-600" @click="changePage(page)">
-          <a class="text-16 leading-[2.8]" href="javascript:void(0)">{{ page }}</a>
-      </li>
-      <li class="w-12 h-12 text-center border rounded-full cursor-default border-gray-100/50 dark:border-zinc-600 dark:border-gray-100/20" :class="{ 'opacity-50 cursor-not-allowed': currentPage === totalPages }" @click="currentPage < totalPages && changePage(currentPage + 1)">
-          <a href="javascript:void(0)" tabindex="-1">
+            </a>
+          </li>
+          <li v-for="page in totalPages" :key="page" :class="{ 'text-white bg-violet-500': currentPage === page, 'text-gray-900 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:text-gray-50 dark:hover:bg-gray-500/20': currentPage !== page }" class="w-12 h-12 text-center transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 dark:border-zinc-600" @click="changePage(page)">
+            <a class="text-16 leading-[2.8]" href="javascript:void(0)">{{ page }}</a>
+          </li>
+          <li class="w-12 h-12 text-center border rounded-full cursor-default border-gray-100/50 dark:border-zinc-600 dark:border-gray-100/20" :class="{ 'opacity-50 cursor-not-allowed': currentPage === totalPages }" @click="currentPage < totalPages && changePage(currentPage + 1)">
+            <a href="javascript:void(0)" tabindex="-1">
               <i class="mdi mdi-chevron-double-right text-16 leading-[2.8]"></i>
-          </a>
-      </li>
-    </ul>
-  </section>
-  </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
   </div>
 </template>
 
 <style scoped>
-
 .media:hover .opacity-0 {
   opacity: 1;
 }
@@ -162,9 +162,10 @@ const changePage = (page: number) => {
 .project {
   margin-bottom: 2em;
 }
-img{
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
+
+img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
 }
 </style>

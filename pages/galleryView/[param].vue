@@ -28,6 +28,7 @@ interface ProfessionalProject {
   created_at: string;
   updated_at: string;
   professional: Professional;
+  description: string;
 }
 
 interface ProjectData {
@@ -56,31 +57,31 @@ onMounted(() => {
 });
 
 
-onMounted(async () => {
-  try {
-    const response = await fetch('http://localhost:8000/api/gallery/gallery-show');
-    if (!response.ok) {
-      const data = await response.json();
-      console.log('Response data:', data);
+// onMounted(async () => {
+//   try {
+//     const response = await fetch('http://localhost:8000/api/gallery/gallery-show');
+//     if (!response.ok) {
+//       const data = await response.json();
+//       console.log('Response data:', data);
 
-      projectshow.value = data.data;
-      console.log(projects.value);
-      const filteredProjects = data.data.map((project: ProjectData) => {
-        const filteredMedia = project.media.filter((media) => media.file.startsWith('0'));
-        return { ...project, media: filteredMedia };
-      });
+//       projectshow.value = data.data;
+//       console.log(projects.value);
+//       const filteredProjects = data.data.map((project: ProjectData) => {
+//         const filteredMedia = project.media.filter((media) => media.file.startsWith('0'));
+//         return { ...project, media: filteredMedia };
+//       });
 
-      projectshow.value = filteredProjects;
-      console.log('Filtered Projects:', projects.value);
-    }
-    const data = await response.json();
-    projectshow.value = data.data; // Adjust this based on your API response structure
-  } catch (err) {
-    error.value = 'Failed to load projects.';
-  } finally {
-    loading.value = false;
-  }
-});
+//       projectshow.value = filteredProjects;
+//       console.log('Filtered Projects:', projects.value);
+//     }
+//     const data = await response.json();
+//     projectshow.value = data.data; // Adjust this based on your API response structure
+//   } catch (err) {
+//     error.value = 'Failed to load projects.';
+//   } finally {
+//     loading.value = false;
+//   }
+// });
 
 const fetchGallery = async (param: string) => {
   try {
@@ -172,9 +173,7 @@ const fetchGallery = async (param: string) => {
                     </NuxtLink>
                     <div class="text-left">
                       <p>
-                        If ever we need to add a description, you can do it here in this paragraph.
-                        If ever we need to add a description, you can do it here in this paragraph.
-                        If ever we need to add a description, you can do it here in this paragraph.
+                        {{ project.professional_project.description }}
                       </p>
                     </div>
                   </div>

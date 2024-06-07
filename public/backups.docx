@@ -886,3 +886,24 @@ export default {
   </div>
 </template> -->
 
+project cost bckup
+
+const costs = ref([]);
+
+async function fetchCost() {
+  try {
+    const response = await fetch('http://localhost:8000/api/master/cost-range-show');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    costs.value = data.data;
+  } catch (error) {
+    console.error('Error fetching cost:', error);
+  }
+}
+
+ <label class="text-xl text-gray-500">Cost:</label>
+                  <select v-model="formData.cost" class="w-full text-black placeholder:text-gray-100" >
+                    <option v-for="cost in costs" :key="cost.id" :value="cost.id"> {{ cost.cost_min}} - {{ cost.cost_max}} </option>
+                  </select>
