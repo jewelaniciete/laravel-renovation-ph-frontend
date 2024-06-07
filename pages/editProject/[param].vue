@@ -116,66 +116,99 @@ async function updateProject() {
 </script>
 
 <template>
-  <div class="main-content bg-gray-400">
+  <div class="bg-gray-400 main-content">
     <div class="page-content">
-      <section class="relative py-20">
+      <section class="relative py-28">
         <div class="container mx-auto">
-          <div class="">
-            <div class="mx-auto bg-white p-6 text-gray-400 space-y-3">
-
+          <div class="flex flex-col gap-5 lg:flex-row">
+            <div class="order-2 w-full p-6 mx-auto bg-white lg:order-1">
               <div v-if="error">
-                <p>Error: {{ error.message }}</p>
-              </div>
-            
-              <div v-else-if="project" class="p-10 space-y-3">
-                <form @submit.prevent="updateProject">
-                  <div class="flex flex-col ">
-                    <label class="pr-3 text-black text-lg font-semibold">Project Title:</label>
-                    <input v-model="formData.name" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md w-70" :placeholder="project.name">
-                    
-                    <label class="pr-3 text-black text-lg font-semibold">Project Duration</label>
-                    <div class="w-1/2 space-x-2">
-                      <label class="pr-3 text-black text-lg font-semibold">Start Date:</label>
-                    <input v-model="formData.start_date" class="w-1/2 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" :placeholder="project.start_date" type="date">
-                   
-                    <label class="pr-3 text-black text-lg font-semibold" >End Date:</label>
-                    <input v-model="formData.end_date" class="w-1/2 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" :placeholder="project.end_date" type="date">
+              <p>Error: {{ error.message }}</p>
+            </div>
+          
+            <div v-else-if="project" class="p-10 space-y-3">
+              <button @click="$router.back()" class="font-semibold text-gray-400">← Back</button>
+              <h3>Project Details</h3>
+              <form @submit.prevent="updateProject">
+                <div class="flex flex-col">
+                  <div class="w-full">
+                    <label class="text-sm font-semibold text-black">Project Title:</label>
+                    <input v-model="formData.name" class="w-full p-1 text-black bg-white border rounded-md placeholder:text-gray-400" :placeholder="project.name">
                   </div>
-                   
-                  <div class="flexs space-y-3 space-x-4">
-                    <label class="pr-3 text-black text-lg font-semibold" >Project Cost:</label>
-                    <input v-model="formData.cost" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md w-40" :placeholder="project.cost" type="number">   
-                   
-                    <label class="pr-3 text-black text-lg font-semibold" >Privacy:</label>
-                    <input v-model="formData.privacy_settings" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md w-40" :placeholder="project.privacy_settings" type="number">   
-                  </div>
-                  <label class="pr-3 text-black text-lg font-semibold" >Description:</label>
-                    <textarea v-model="formData.description" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md w-40" :placeholder="project.description" />   
 
+                  <div class="w-full mt-3">
+                    <label class="text-sm font-semibold text-black">Project Description:</label>
+                    <textarea v-model="formData.description" class="w-full p-1 text-black bg-white border rounded-md placeholder:text-gray-400" :placeholder="project.description" />   
                   </div>
-                  <div v-if="project.media" class="space-y-3 mt-2">
-                    <h3>Project Media <span class="text-xs">(Click photo to edit)</span></h3>
-                    
-                    <div class="flex">
-                      <div v-for="media in project.media" :key="media.id">
-                        <NuxtLink :to="`/mediaUpdate/${media.id}`">
-                          <img :src="media.profile_routes" class="pv p-1" />
-                        </NuxtLink>
-                      </div>
+                  
+                  <div class="w-full mt-3">
+                    <label class="text-sm font-semibold text-black ">Start Date:</label>
+                    <input v-model="formData.start_date" class="w-full p-1 text-black bg-white border rounded-md placeholder:text-gray-400" :placeholder="project.start_date" type="date">
+                  </div>
+                  <div class="w-full mt-3">
+                    <label class="mt-1 text-sm font-semibold text-black" >End Date:</label>
+                    <input v-model="formData.end_date" class="w-full p-1 text-black bg-white border rounded-md placeholder:text-gray-400" :placeholder="project.end_date" type="date">
+                  </div>
+                 
+                  <div class="w-full mt-3">
+                    <label class="text-sm font-semibold text-black" >Project Cost:</label>
+                    <input v-model="formData.cost" class="w-full p-2 text-black bg-white border rounded-md placeholder:text-gray-400" :placeholder="project.cost" type="number">   
+                  
+                    <!-- <label class="pr-3 text-lg font-semibold text-black" >Privacy:</label>
+                    <input v-model="formData.privacy_settings" class="w-40 p-2 text-black bg-white border rounded-md placeholder:text-gray-400" :placeholder="project.privacy_settings" type="number">    -->
+                  </div>
+                
+                  <div class="flex flex-row-reverse mt-6 space-x-4">
+                    <button type="submit" class="px-3 py-2 font-semibold text-black bg-gray-400 rounded-md">Save</button>
+                  </div>
+                </div>
+                <div v-if="project.media" class="mt-6 space-y-3">
+                  <h3>Project Media <span class="text-sm">(Click photo to edit)</span></h3>
+                  
+                  <div class="flex">
+                    <div v-for="media in project.media" :key="media.id">
+                      <NuxtLink :to="`/mediaUpdate/${media.id}`">
+                        <img :src="media.profile_routes" class="p-1 pv" />
+                      </NuxtLink>
                     </div>
                   </div>
-                  <div class="space-x-4">
-                  <button type="submit" class="bg-gray-400 px-3 py-2 rounded-md text-black font-semibold">Save</button>
                 </div>
-                </form>
-                <button @click="$router.back()" class="text-gray-400 font-semibold">Back</button>
-
+                
+              </form>
               
 
+            </div>
+            
+            <div v-else>
+              <p>Loading...</p>
+            </div>
+             
+            </div>
+
+            <div class="order-1 w-full p-6 text-black bg-white lg:order-2 lg:w-custom h-60">
+              <p class="text-2xl font-semibold">Photo Guidelines</p>
+              <p>Photos that do not meet these guidelines will be removed.</p>
+
+              <label class="text-green-500">Do's</label>
+              <div class="flex gap-6">
+                <img src="/assets/images/renovation/dos.svg" />
+
+                <ul class="text-xs list-disc">
+                  <li>Photos of residential spaces</li>
+                  <li>Large Photos (1000 pixels wide or more)</li>
+                  <li>SGV, PNG or JPG is accepted</li>
+                  <li>Good Quality Photos</li>
+                  <li>Max 100MB</li>
+                </ul>
               </div>
-              
-              <div v-else>
-                <p>Loading...</p>
+              <label class="text-red-500">Don'ts</label>
+              <div class="flex gap-6">
+                <img src="/assets/images/renovation/donts.svg" />
+                <ul class="text-xs list-disc">
+                  <li>Photos of commercial or office spaces Small Photos PDF</li>
+                  <li>Multi-Page TIFF or EPS file formats</li>
+                  <li>Low Quality Photos</li>
+                </ul>
               </div>
             </div>
           </div>

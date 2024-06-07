@@ -101,7 +101,7 @@ async function profileView() {
                                                     class="relative flex items-end justify-start w-full gap-3 mt-6 flex-cols">
                                                     <div class="flex items-start justify-start">
                                                         <img id="profile-img" :src="profile.profile_route" alt=""
-                                                            class=" w-48 h-48 border-4 ">
+                                                            class="w-48 h-48 border-2 ">
                                                     </div>
                                                     <div class="flex flex-col mt-3">
                                                         <h6 class="text-2xl font-bold text-gray-900 dark:text-gray-50">
@@ -112,12 +112,12 @@ async function profileView() {
                                                 </div>
 
                                                 <div v-else
-                                                    class="flex-cols relative mt-6 flex w-full items-end justify-start gap-3">
+                                                    class="relative flex items-end justify-start w-full gap-3 mt-6 flex-cols">
                                                     <div class="flex items-start justify-start">
                                                         <img src="assets/images/renovation/default.jpg"
-                                                            class=" h-48 w-48 border-4" />
+                                                            class="w-48 h-48 border-4 " />
                                                     </div>
-                                                    <div class="mt-3 flex flex-col">
+                                                    <div class="flex flex-col mt-3">
                                                         <h6 class="text-2xl font-bold text-gray-900">Loading...
                                                         </h6>
                                                         <p class="mt-1 text-gray-500">Loading...</p>
@@ -156,7 +156,7 @@ async function profileView() {
                                                     <p class="w-full text-gray-400 "> <project-count /> </p>
                                                 </div>
                                                 <div v-else>
-                                                    <p class="lg:justify-end text-xl text-gray-400">Fetching Project Count</p>
+                                                    <p class="text-xl text-gray-400 lg:justify-end">Fetching Project Count</p>
                                                 </div>
                                             </div>
                                             <section class="py-16">

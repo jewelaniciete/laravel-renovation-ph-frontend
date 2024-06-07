@@ -2546,6 +2546,9 @@ body{
 .h-50{
   height: 11rem !important;
 }
+.h-51{
+  height: 12rem !important;
+}
 .h-5{
   height: 1.25rem !important;
 }
@@ -7977,6 +7980,9 @@ body{
   .lg\:max-w-md{
     max-width: 28rem !important;
   }
+  .lg\:w-70{
+    width: 50rem !important;
+  }
   .lg\:flex-row{
     -webkit-box-orient: horizontal !important;
     -webkit-box-direction: normal !important;
@@ -8007,6 +8013,9 @@ body{
     -webkit-box-pack: justify !important;
         -ms-flex-pack: justify !important;
             justify-content: space-between !important;
+  }
+  .lg\:gap-0{
+    gap: 0 !important;
   }
   .lg\:gap-10{
     gap: 2.5rem !important;

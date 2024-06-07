@@ -134,27 +134,40 @@ async function fetchProjinfo() {
 </script>
 
 <template>
-  <div class="main-content bg-gray-400">
+  <div class="bg-gray-400 main-content">
     <div class="page-content">
-      <section class="relative py-20">
+      <section class="relative py-28">
         <div class="container mx-auto">
-          <div class="grid grid-cols-2">
-            <div class="w-70 mx-auto bg-white p-6 text-gray-400 space-y-3">
-              <div><button @click="$router.back()" class="text-gray-400 font-semibold">Back</button></div>
-              <p class="text-4xl font-semibold">Project Details</p>
+          <div class="flex flex-col gap-2 lg:gap-0 lg:flex-row">
+            <div class="w-full p-6 mx-auto space-y-3 text-gray-400 bg-white lg:w-70">
+              <div><button @click="$router.back()" class="font-semibold text-gray-400">← Back</button></div>
+              <p class="text-xl font-semibold">Project Details</p>
               <div v-if="error">
                 <p>Error: {{ error.message }}</p>
               </div>
               <div v-else-if="project" class="space-y-3 text-black">
-                <p class="text-xl">{{ project.data.name }}</p>
-                <p class="text-base">Project Duration: {{ project.data.start_date }} - {{ project.data.end_date }}</p>
-                <p class="text-base">Project Cost: {{ project.data.cost }}</p>
-                <div v-if="project.data.media" class="space-y-3">
-                  <NuxtLink :to="`/editProject/${project.data.id}`"  class="bg-gray-btn border p-2 rounded-md hover:bg-gray-500 hover:text-white">Edit Project</NuxtLink>
-                  <h3>Project Media</h3>
-                  <div class="flex">
+                <div class="space-y-2">
+                  <p class="text-2xl font-bold">{{ project.data.name }}</p>
+                  <p class="px-2 text-base">Project Duration: <span class="font-semibold">{{ project.data.start_date }} - {{ project.data.end_date }}</span></p>
+                  <p class="px-2 text-base">Project Cost: <span class="font-semibold">{{ project.data.cost }}</span></p>  
+                </div>
+                
+                <div v-if="project.data.media" class="py-5 space-y-3">
+                  <div class="flex flex-row w-full gap-3">
+                    <diV class="">
+                      <h3>Project Media</h3>
+                    </diV>
+                    <div class="flex">
+                      <NuxtLink :to="`/editProject/${project.data.id}`" class="flex items-center justify-center gap-2 p-1 border rounded-md bg-gray-btn hover:bg-gray-500 hover:text-white">
+                        <img src="assets/images/logo/editt.svg" class="w-5 h-5" alt="Edit Project" />
+                        <p class="text-sm">Edit Project</p>
+                      </NuxtLink>
+                    </div>
+                  </div>
+                  
+                  <div class="flex flex-col items-center justify-center lg:flex-row">
                   <div v-for="media in project.data.media" :key="media.id">
-                    <img :src="media.profile_routes" class="pv p-1" />
+                    <img :src="media.profile_routes" class="p-1 pv" />
                   </div>
                   </div>
                 </div>
@@ -164,10 +177,10 @@ async function fetchProjinfo() {
               </div>
             </div>
 
-            <div class="w-30 h-auto mx-auto sticky bg-white p-6 text-black">
-              <p class="text-2xl font-semibold pb-2">Other Projects</p>
+            <div class="sticky h-auto p-6 mx-auto text-black bg-white w-30">
+              <p class="pb-2 text-2xl font-semibold">Other Projects</p>
               <div class="flex gap-6">
-                <ul class="text-sm space-y-2">
+                <ul class="space-y-2 text-sm">
                   <li class="list-item"><NuxtLink to="/professional-profile"> All Projects </NuxtLink></li>
                   <li v-for="(proj, index) in projInfo" :key="index" class="list-item">
                     <NuxtLink :to="`/projectView/${proj.professional_project.id}`" class="form-text" aria-current="page">{{ proj.professional_project.name }}</NuxtLink>

@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   },
 
   ssr: true,
-  devtools: { enabled: true },
+  devtools: { enabled: false },
 
   css: [
     '~/assets/css/icons.css',

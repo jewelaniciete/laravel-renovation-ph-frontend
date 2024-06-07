@@ -104,7 +104,7 @@ const changePage = (page: number) => {
     <div class="container-gallery">
       <div class="grid grid-flow-row grid-cols-12 gap-3 p-2 grid-fluid gap-y-4 md:gap-y-8 md:p-4 md:gap-8">
         <div v-for="project in projects" :key="project.id" :class="randomColSpan()" class="relative overflow-hidden rounded-md group/modern">
-          <NuxtLink :to="`/galleryView/${project.id}`">
+          <NuxtLink :to="`/galleryView/${project.media[0].id}`">
             <div v-if="project.media.length > 0" class="relative media">
               <img :src="project.media[0].profile_routes[0]" alt="Project Media"  class="transition-all duration-500 ease-in-out scale-110 rounded-md group-hover/modern:-translate-x-2 group-hover/modern:transition-all" />
               <div class="absolute inset-0 transition-all duration-500 bg-black rounded-md opacity-0 group-hover:opacity-40 "></div>

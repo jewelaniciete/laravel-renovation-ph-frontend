@@ -221,7 +221,7 @@ const passwordForm = ref({
                           <div class="flex items-center justify-center lg:items-start lg:justify-start">
                             <NuxtLink href="#profile" @click.prevent="showModal = true">
                               <img id="profile-img" :src="profile.profile_route" alt=""
-                                class="w-48 h-48 border-4 rounded-full" />
+                                class="w-48 border-4 rounded-full h-51" />
                             </NuxtLink>
                           </div>
                           <div class="mt-3">
@@ -242,7 +242,7 @@ const passwordForm = ref({
                                   class="relative overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl top-36 dark:bg-neutral-800"
                                   @click.stop>
                                   <div class="p-12 bg-white dark:bg-neutral-800">
-                                    <label class="text-black">Upload Files</label>
+                                    <label class="text-black">Add Profile</label>
                                     <div>
                                       <input type="file"
                                         class="w-full mt-2 text-black border-gray-100 rounded placeholder:text-13 placeholder:text-gray-200 focus:ring-1 focus:ring-green-900 dark:bg-transparent dark:text-gray-50 dark:border-neutral-600"
@@ -251,8 +251,8 @@ const passwordForm = ref({
                                         <img :src="imageUrl" alt="Image Preview" class="h-auto max-w-full rounded" />
                                       </div>
                                     </div>
-                                    <div class="p-4">
-                                      <label class="text-black">Caption</label>
+                                    <div class="hidden py-2">
+                                      <label class="text-black">Caption</label><br>
                                       <input class="text-gray-400" type="text" name="Caption" v-model="caption" />
                                     </div>
                                     <button

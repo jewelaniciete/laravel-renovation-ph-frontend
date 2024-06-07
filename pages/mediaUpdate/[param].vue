@@ -123,7 +123,6 @@ onMounted(async () => {
     }
     const data = await response.json();
     projects.value = data.data;
-    formData.value = {...formData.value, ...projects.value};
   } catch (error) {
     console.error('Error fetching project media:', error);
   }
@@ -153,7 +152,7 @@ async function updateMedia() {
     }
     const data = await response.json();
     projects.value = data.data;
-    formData.value = {...formData.value, ...projects.value};
+    formData.value = {...formData.value};
 
     setTimeout(() => {
       window.history.go(-1);
@@ -165,50 +164,59 @@ async function updateMedia() {
 </script>
 
 <template>
-  <div class="main-content bg-gray-300">
+  <div class="bg-gray-300 main-content">
     <div class="page-content">
-      <section class="relative py-20">
+      <section class="relative py-28">
         <div class="container mx-auto">
           <div v-if="projects.length">
-            <div v-for="project in projects" :key="project.id" class="gap-10">
-              <div v-for="mediaUrl in project.media.profile_routes" :key="mediaUrl" class="w-auto bg-gray-400 p-4">
-                <img :src="mediaUrl" alt="Project Media" />
+            <h3>Edit Project Image</h3>
+            <div v-for="project in projects" :key="project.id" class="flex flex-col w-full gap-10 py-2 lg:flex-row">
+              
+              <div v-for="mediaUrl in project.media.profile_routes" :key="mediaUrl" class="flex items-center justify-center w-full max-h-full p-4 bg-gray-400">
+                <img :src="mediaUrl" alt="Project Media" class="object-contain w-30"/>
               </div>
-              <div class="w-auto bg-white p-4">
-                <p class="text-2xl font-bold text-black">{{ project.id }}</p>
+              <div class="flex flex-col w-full p-4 bg-white">
                 <form @submit.prevent="updateMedia">
-                  <label class="text-black font-semibold text-2xl">Title:</label>
-                  <input v-model="formData.title" :placeholder="project.title" class="ml-4 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" />
-
-                  <label class="text-black font-semibold text-2xl">Description:</label>
-                  <textarea  v-model="formData.description" :placeholder="project.description" class="ml-4 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md" />
-
-                  <label class="text-black font-semibold text-2xl">Space ID:</label>
-                  <select v-model="formData.space_id" class="ml-4 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md">
-                    <option v-for="space in spaces" :key="space.id" :value="space.id">{{ space.name }}</option>
-                  </select>
-
-                  <label class="text-black font-semibold text-2xl">Style ID:</label>
-                  <select v-model="formData.style_id" :placeholder="project.style_id" class="ml-4 text-black placeholder:text-gray-400 bg-white border p-2 rounded-md">
-                    <option v-for="style in styles" :key="style.id" :value="style.id">{{ style.name }}</option>
-                  </select>
-                    
-
-                  <div class="space-x-4 mt-10">
-                    <button type="submit" class="text-black font-semibold bg-gray-400 px-3 py-2 rounded">Submit</button>
+                  <div class="w-full">
+                    <label class="text-sm font-semibold text-black">Title:</label>
+                    <input v-model="formData.title" :placeholder="project.title" class="w-full p-1 text-black bg-white border rounded-md placeholder:text-gray-400" />
                   </div>
-                
+                  
+                  <div class="w-full mt-4">
+                    <label class="text-sm font-semibold text-black">Description:</label>
+                    <textarea  v-model="formData.description" :placeholder="project.description" class="w-full p-2 text-black bg-white border rounded-md placeholder:text-gray-400" />
+                  </div>
+
+                  <div class="w-full mt-4">
+                    <label class="text-sm font-semibold text-black">Space:</label>
+                    <select v-model="formData.space_id" class="w-full p-1 text-black bg-white border rounded-md placeholder:text-gray-400">
+                      <option v-for="space in spaces" :key="space.id" :value="space.id">{{ space.name }}</option>
+                    </select>
+                  </div>
+                  
+                  <div class="w-full mt-4 ">
+                    <label class="text-sm font-semibold text-black">Style:</label>
+                    <select v-model="formData.style_id" :placeholder="project.style_id" class="w-full p-1 text-black bg-white border rounded-md placeholder:text-gray-400">
+                      <option v-for="style in styles" :key="style.id" :value="style.id">{{ style.name }}</option>
+                    </select>
+                  </div>
+
+                  <div class="flex flex-row-reverse mt-6 space-x-4">
+                    <button type="submit" class="px-3 py-2 font-semibold text-black bg-gray-400 rounded">Submit</button>
+                  </div>
+                  
                 </form>
                 <div class="space-x-4 ">
-                    <button @click="$router.back()" class="text-white font-semibold bg-red-500 px-3 py-2 rounded">Cancel</button>
-
-                  </div>
+                    <button @click="$router.back()" class="font-semibold text-gray-400">← Cancel</button>
+                </div>
                 
               </div>
             </div>
           </div>
           <div v-else>
-            Loading...
+            <div class="h-full">
+                Loading...
+            </div>
           </div>
         </div>
       </section>
