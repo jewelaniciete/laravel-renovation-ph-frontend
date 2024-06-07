@@ -217,7 +217,7 @@ onMounted(() => {
                             :modules="modules" class="mySwiper"
                             >
                         <swiper-slide v-for="(card, index) in cardData" :key="index" class="p-4">
-                            <div class="overflow-hidden bg-white rounded-lg shadow-lg lg:max-w-sm ring-4  ring-red-500 ring-opacity-40">
+                            <div class="overflow-hidden bg-white rounded-lg shadow-lg lg:max-w-sm ring-4 ring-red-500 ring-opacity-40">
                                 <div class="relative">
                                     <img class="w-full " :src="card.image" alt="Product Image">
                                 </div>
@@ -313,14 +313,8 @@ onMounted(() => {
             <!-- end cta -->
 
             <!-- start testimonial -->
-            <section class="py-20 dark:bg-neutral-800">
+            <section class="py-16 dark:bg-neutral-800">
                       <div class="container mx-auto">
-                          <div class="grid grid-cols-1 gap-5">
-                              <div class="mb-5 text-center">
-                                  <h3 class="mb-3 text-3xl text-gray-900 dark:text-gray-50">Happy Candidates</h3>
-                                  <p class="mb-5 text-gray-500 whitespace-pre-line dark:text-gray-300">Post a job to tell us about your project. We'll quickly match you with the right <br> freelancers.</p>
-                              </div>
-                          </div>
                           <div class="grid grid-cols-12 mt-8">
                               <div class="col-span-12 lg:col-span-8 lg:col-start-3">
                                   <div class="pb-5 swiper testimonialSlider">
@@ -376,7 +370,7 @@ onMounted(() => {
 
 
             <!-- start client -->
-            <section class="py-10 dark:bg-neutral-800">
+            <!-- <section class="py-10 dark:bg-neutral-800">
                       <div class="container mx-auto">
                           <div class="grid grid-cols-12 gap-5">
                               <div class="col-span-12 lg:col-span-2">
@@ -403,7 +397,7 @@ onMounted(() => {
                               </div>
                           </div>
                       </div>
-            </section>
+            </section> -->
             <!-- end client -->   
         </div>
     </div>
