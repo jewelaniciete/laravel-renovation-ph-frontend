@@ -16,6 +16,7 @@ const formData = ref({
   cost: '',
   start_date: '',
   end_date: '',
+  description: '',
   privacy_settings: '',
 });
 
@@ -71,6 +72,7 @@ async function uploadProject() {
   body.append('cost', formData.value.cost);
   body.append('start_date', formData.value.start_date);
   body.append('end_date', formData.value.end_date);
+  body.append('description', formData.value.description);
 
   try {
     const response = await fetch(`http://localhost:8000/api/professionals/project-store`, {
@@ -151,7 +153,10 @@ async function uploadProject() {
                     <input v-model="formData.end_date" type="date" class="w-full text-black" />
                   </div>
                 </div>
-
+                <div class="p-3">
+                    <label class="text-gray-500">End of project</label><br />
+                    <textarea v-model="formData.description" type="text" placeholder="Add Description" class="w-full text-black" />
+                  </div>
                 <!-- Input Image -->
                 <div class="flex items-center justify-center w-full py-6">
                   <label for="dropzone-file"

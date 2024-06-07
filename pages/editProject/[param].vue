@@ -14,6 +14,7 @@ interface ProjectData {
   end_date: string;
   slug: string;
   privacy_settings: string;
+  description: string;
   cost: string;
   media: ProjectMedia[];
 }
@@ -30,6 +31,7 @@ const formData = ref({
   end_date: '',
   cost: '',
   privacy_settings: '',
+  description: '',
 })
 
 onMounted(() => {
@@ -147,7 +149,9 @@ async function updateProject() {
                     <label class="pr-3 text-black text-lg font-semibold" >Privacy:</label>
                     <input v-model="formData.privacy_settings" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md w-40" :placeholder="project.privacy_settings" type="number">   
                   </div>
-                 
+                  <label class="pr-3 text-black text-lg font-semibold" >Description:</label>
+                    <textarea v-model="formData.description" class="text-black placeholder:text-gray-400 bg-white border p-2 rounded-md w-40" :placeholder="project.description" />   
+
                   </div>
                   <div v-if="project.media" class="space-y-3 mt-2">
                     <h3>Project Media <span class="text-xs">(Click photo to edit)</span></h3>
