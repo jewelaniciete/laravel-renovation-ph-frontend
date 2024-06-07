@@ -219,7 +219,7 @@ async function logout() {
         <div class="mx-auto container-fluid">
             <div class="flex items-center mx-auto lg:flex-wrap justify-normal lg:justify-between">
                 <a href="/" class="flex items-center">
-                    <img src="assets/images/renovation.svg" alt="" class="logo-dark h-[22px] block dark:hidden">
+                    <img src="assets/images/renovation.svg" alt="" class="logo-dark w-48 block dark:hidden">
                 </a>
                 <button data-collapse-toggle="navbar-collapse" type="button"
                     class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg navbar-toggler group lg:hidden hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -266,12 +266,13 @@ async function logout() {
                     <div v-else-if="showNavbarAccount" class="flex flex-row">
                         <div>
                             <div class="relative dropdown">
-                                <NuxtLink to="/projectForm" class="flex items-center py-3 rounded border-dashed mt-4 border lg:px-4 dropdown-toggle"
+                                <NuxtLink to="/projectForm"
+                                    class="flex bg-gray-400 hover:bg-gray-500 items-center py-3 rounded border-dashed mt-4 border lg:px-4 dropdown-toggle"
                                     id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="true">
                                     <img src="assets/images/renovation/add.svg" alt="" class="w-6 h-6">
                                 </NuxtLink>
-                                </div>
+                            </div>
                         </div>
 
                         <div>
@@ -475,8 +476,8 @@ async function logout() {
                                     Explore Spaces <i class='bx bxs-chevron-down ltr:ml-1 rtl:mr-1'></i>
                                 </button>
                             </NuxtLink>
-                            <ul class="z-50 w-auto p-5 bg-white border-0 rounded dropdown-menu lg:absolute lg:border border-gray-500/20 lg:shadow-lg dark:bg-neutral-800"
-                                aria-labelledby="category">
+                            <ul class="z-50 w-auto p-5 bg-white border-0 rounded lg:absolute lg:border border-gray-500/20 lg:shadow-lg dark:bg-neutral-800 right-"
+                                aria-labelledby="category"> <!-- dropdown-menu  -->
                                 <CategoriesDrop />
                             </ul>
 

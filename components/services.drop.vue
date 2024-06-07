@@ -2,28 +2,19 @@
   <div>
     <!-- Tabs for categories -->
     <div class="flex border-b">
-      <div 
-        v-for="category in categoryDropdown" 
-        :key="category.id" 
-        @click="selectedCategory = category.id" 
+      <div v-for="category in categoryDropdown" :key="category.id" @click="selectedCategory = category.id"
         class="cursor-pointer py-2 px-4 text-base font-semibold"
-        :class="{'border-b-2 border-green-500': selectedCategory === category.id}"
-      >
+        :class="{ 'border-b-2 border-green-500': selectedCategory === category.id }">
         {{ category.name }}
       </div>
     </div>
 
     <!-- Content for selected tab -->
     <div class="p-4">
-      <ul v-if="selectedCategory" aria-labelledby="pages">       
-        <li  class="flex flex-wrap gap-4 text-gray-800 "
-          v-for="sub in subcategoryDropdown.filter(sub => sub.category_id === selectedCategory)" 
-          :key="sub.slug"
-        >
-          <NuxtLink
-            :to="`/services/${sub.id}`"
-            class="subcategory-item1 flex flex-wrap items-center justify-center"
-          >
+      <ul v-if="selectedCategory" aria-labelledby="pages">
+        <li class="flex flex-wrap gap-4 text-gray-800 "
+          v-for="sub in subcategoryDropdown.filter(sub => sub.category_id === selectedCategory)" :key="sub.slug">
+          <NuxtLink :to="`/services/${sub.id}`" class="subcategory-item1 flex flex-wrap items-center justify-center">
             {{ sub.name }}
           </NuxtLink>
         </li>
@@ -92,6 +83,7 @@ async function fetchSubCategories() {
 .border-b-2 {
   border-bottom-width: 2px;
 }
+
 .border-indigo-500 {
   border-color: #6366F1;
 }

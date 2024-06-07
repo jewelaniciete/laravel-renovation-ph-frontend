@@ -13,10 +13,13 @@ interface Professional {
   projects: Project[];
   first_name: string;
   last_name: string;
+  contact_number: string;
+  address: string;
 }
 
 
 interface Service {
+  id: number;
   professionals: Professional;
   master_service: masterService;
   profile_route: string;

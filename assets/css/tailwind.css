@@ -926,6 +926,8 @@ body{
 }
 .dropdown-menu{
   display: none;
+  transform: 0;
+  
 }
 .dropdown:focus .dropdown-menu{
   position: relative;
@@ -8147,6 +8149,7 @@ body{
 .category-container {
   /* Adjust spacing between categories */
   width: 130px;
+  
 }
 .category-container-service {
   /* Adjust spacing between categories */
@@ -8154,9 +8157,9 @@ body{
 }
 
 .category-name {
-  text-align: center;
+  margin-left: 9px;
   margin-bottom: 10px; /* Adjust spacing between category name and subcategories */
-  
+ 
 }
 
 .subcategory-list {

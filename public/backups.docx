@@ -907,3 +907,7 @@ async function fetchCost() {
                   <select v-model="formData.cost" class="w-full text-black placeholder:text-gray-100" >
                     <option v-for="cost in costs" :key="cost.id" :value="cost.id"> {{ cost.cost_min}} - {{ cost.cost_max}} </option>
                   </select>
+
+
+
+                   <NuxtLink :to="`/galleryView/${project.media[0].id}`">
